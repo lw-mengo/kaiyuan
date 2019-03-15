@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="author" content="mengo">
+    <title>演示主页</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">logo</h3>
+                    <nav>
+                        <ul class="nav masthead-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="/login">Login</a></li>
+                          <!--  <li><a href="#">Contact</a></li>-->
+                            <li><a href="#">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="inner cover">
+                <h1>大数据可视化分析挖掘</h1>
+                <p class="lead">关系网络大数据可视化分析挖掘平台，提供完善的在线探索式浏览、关联路径发现，以及全景浏览功能。</p>
+
+                <form method="post" action="/upload" enctype="multipart/form-data">
+
+                        <input  type="file" name="file" style="display: inline-block;">
+                    <button class="btn btn-default" type="submit" value="提交">上传</button>
+                </form>
+
+
+            </div>
+
+            <div class="mastfoot">
+                <div class="inner">
+                    <p>Copyright © 2019 GraphViz.cn . All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--js放在后面提高页面加载速度-->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
