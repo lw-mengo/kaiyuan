@@ -1,0 +1,29 @@
+.section{
+    clear: both;
+    padding: 86px 0;
+}
+.section .section-main{
+    margin: 0 auto;
+    width: 1200px;
+    display: flex;
+    -webkit-box-pack:justify;
+    justify-content: space-between;
+}
+.section .section-main .half-section{
+    -webkit-box-flex:1;
+    flex: 1;
+    padding: 20px 12px;
+}
+.section-main .con-title{
+    color:red;
+    font-size: 30px;
+}
+.section-main .con-details{
+    margin-top: 36px;
+    color: #666;
+    font-size: 14px;
+}
+.section-main .half-section .imgBox img{
+    float: right;
+    display: block;
+}

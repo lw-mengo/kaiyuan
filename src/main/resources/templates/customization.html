@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zn-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="author" content="mengo">
+    <title>数据处理</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/result.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" style="margin-bottom: 10px;" href="#"><img src="img/l.png"
+                                                                               style="width: 40px;display: inline-block;">知识图谱大数据可视化分析挖掘平台</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">首页</a></li>
+                <li><a href="/login">用户登录</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-1 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">导入数据<span class="sr-only">(current)</span></a></li>
+                <li><a href="/customization_browse">数据浏览</a></li>
+                <li><a href="/customization_mission">制图任务</a></li>
+                <li><a href="/customization_result">分析挖掘</a></li>
+            </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-11 col-md-offset-1 main">
+            <!--   <h1 class="page-header">结果显示</h1>-->
+            <div class="row placeholder">
+                <div class="container">
+                    <form class="my_form" method="post" action="/upload" enctype="multipart/form-data"
+                          name="HtmlFileForm" onsubmit="return check()">
+                       <span id='uploadSpan'>
+                           <input type="file" name="file" data-toggle="tooltip" data-placement="top" title="暂仅支持CSV格式"
+                                  unselectable="on" onchange='checkFileType(this.value);'
+                                  style="display: inline-block;">
+                       </span>
+                        <button class="btn btn-default" type="submit" value="提交">上传</button>
+                    </form>
+                </div>
+                <div class="container">
+                    <h2>数据预览</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>字段1</th>
+                            <th>字段2</th>
+                            <th>字段3</th>
+                            <th>字段4</th>
+                            <th>字段5</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                        </tr>
+                        <tr>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                        </tr>
+                        <tr>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                        </tr>
+                        <tr>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                        </tr>
+                        <tr>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                            <td>数据1</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container">
+                    <h2>导入规则</h2>
+                    <form>
+                        <input type="text">
+                        <button type="submit">导入</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function checkFileType(str) {
+        var pos = str.lastIndexOf(".");
+        var lastname = str.substring(pos, str.length);
+        var resultName = lastname.toLowerCase();
+        if ('.csv' != resultName.toString()) {
+            alert('只能上传csv文件，您上传的文件类型为' + lastname + '，请重新上传');
+            resetFile();
+        }
+    }
+
+    var html = document.getElementById('uploadSpan').innerHTML;
+
+    function resetFile() {
+        document.getElementById('uploadSpan').innerHTML = html;
+    }
+
+    function check() {
+        if (HtmlFileForm.file.value == "") {
+            alert("请选择文件路径");
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+</body>
+</html>

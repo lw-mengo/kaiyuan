@@ -7,24 +7,74 @@
     <meta name="author" content="mengo">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/signin.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/global.css">
     <title>用户登录</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
-<body>
-    <div class="container">
-        <form class="form-signin">
-            <h2 class="form-signin-heading">请登录</h2>
-            <label for="username" class="sr-only">用户名</label>
-            <input type="text" id="username" class="form-control" placeholder="请输入用户名" required autofocus>
-            <label for="pwd" class="sr-only">密码</label>
-            <input type="password" id="pwd" class="form-control" placeholder="请输入密码" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-        </form>
+<body data-path="login">
+<!--旧版删除-->
+<!--
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand"><img src="img/l.png" style="width: 90px;margin-left: -200px"></h3>
+                    <nav>
+                        <ul class="nav masthead-nav">
+                            <li><a href="/">首页</a></li>
+                            <li class="active"><a href="/login">登录</a></li>
+                            <li><a href="/product">产品</a></li>
+                            <li><a href="">定制</a></li>
+                            <li><a href="/about">关于我们</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <form class="form-signin">
+                <h2 class="form-signin-heading">请登录</h2>
+                <label for="username" class="sr-only">用户名</label>
+                <input type="text" id="username" class="form-control" placeholder="请输入用户名" required autofocus>
+                <label for="pwd" class="sr-only">密码</label>
+                <input type="password" id="pwd" class="form-control" placeholder="请输入密码" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+            </form>
+        </div>
     </div>
-
-
-
+</div>
+-->
+<div class="_html">
+    <div class="_body">
+        <section class="main">
+            <div class="mainContent">
+                <div class="loginBox">
+                    <div class="loginForm" id="loginForm">
+                        <div class="login-title">登录</div>
+                        <label class="login-line">
+                            <span class="login-label">用户名</span>
+                            <input type="text" class="hu-input input-primary" placeholder="请输入用户名" id="_login-inputPhone">
+                            <span class="error-info"></span>
+                        </label>
+                        <label class="login-line">
+                            <span class="login-label">密码</span>
+                            <input type="password" class="hu-input input-primary" placeholder="请输入密码" id="_login-inputPwd">
+                            <span class="error-info"></span>
+                        </label>
+                        <button class="login-btn hu-btn btn-primary">登录</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.global.min.js"></script>
+<script src="js/formDate.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/login.js"></script>
+
 </body>
 </html>

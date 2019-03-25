@@ -1,6 +1,7 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,13 +41,43 @@ public class TestController {
         return "result_community";
     }
 
-    @PostMapping("/upload")
+    @RequestMapping("about")
+    public String about(){
+        return "about_new";
+    }
+
+    @GetMapping("product")
+    public String product(){
+        return "result_community";
+    }
+
+    @GetMapping("customization")
+    public String customization(){
+        return "customization";
+    }
+    @GetMapping("customization_browse")
+    public String customizationBrowse(){
+        return "customization_browse";
+    }
+
+    @GetMapping("customization_mission")
+    public String customizationMission(){
+        return "customization_mission";
+    }
+
+    @GetMapping("customization_result")
+    public String customizationResult(){
+        return "customization_result";
+    }
+
+
+    @PostMapping("upload")
     public String upload(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
-            return "upload failed";
+            return "fail";
         }
         String fileName = file.getOriginalFilename();
-        String filePath = "/home/front_dev/upload/";
+        String filePath = "F:\\upload\\";   //"/home/front_dev/upload/"
         File dest = new File(filePath + fileName);
         try {
             file.transferTo(dest);

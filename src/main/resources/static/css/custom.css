@@ -68,6 +68,10 @@ body {
     border-bottom: 2px solid transparent;
 }
 
+.my_form{
+    margin-top: 150px;
+}
+
 .masthead-nav > li > a:hover,
 .masthead-nav > li > a:focus {
     background-color: transparent;

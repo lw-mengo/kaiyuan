@@ -5,10 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="author" content="mengo">
-    <title>演示主页</title>
+    <title>知识图谱大数据可视化分析挖掘平台</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <div class="site-wrapper">
@@ -16,30 +18,31 @@
         <div class="cover-container">
             <div class="masthead clearfix">
                 <div class="inner">
-                    <h3 class="masthead-brand">logo</h3>
+                    <h3 class="masthead-brand"><img src="img/l.png" style="width: 90px;margin-left: -200px"></h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="/login">Login</a></li>
-                          <!--  <li><a href="#">Contact</a></li>-->
-                            <li><a href="#">About</a></li>
+                            <li class="active"><a href="#">首页</a></li>
+                            <li><a href="/product">产品</a></li>
+                            <li><a href="/customization">定制</a></li>
+                            <li><a href="/about">关于我们</a></li>
+                        </ul>
+                    </nav>
+                    <nav>
+                        <ul class="nav masthead-nav" style="margin-right: -400px;">
+                            <li><a href="/login">登录</a></li>
+                            <li><a href="/login">申请试用</a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
             <div class="inner cover">
-                <h1>大数据可视化分析挖掘</h1>
-                <p class="lead">关系网络大数据可视化分析挖掘平台，提供完善的在线探索式浏览、关联路径发现，以及全景浏览功能。</p>
-
-                <form method="post" action="/upload" enctype="multipart/form-data">
-
-                        <input  type="file" name="file" style="display: inline-block;">
-                    <button class="btn btn-default" type="submit" value="提交">上传</button>
-                </form>
-
-
+                <h1>知识图谱大数据可视化分析挖掘平台</h1>
+                <img src="img/indexbg.png" style="margin-top: 30px;height: 170px;"/>
             </div>
 
+
+
+            <!--页脚信息-->
             <div class="mastfoot">
                 <div class="inner">
                     <p>Copyright © 2019 GraphViz.cn . All rights reserved.</p>
@@ -48,8 +51,60 @@
         </div>
     </div>
 </div>
+<div class="section">
+    <div class="section-main">
+        <div class="half-section">
+            <div class="con-title">交互浏览</div>
+            <div class="con-details">使用大图异步加载技术，大图空间布局技术，无缝伸缩技术，流式数据加载与展示技术，
+                实现大规模网络全图展示，同时提供强大的属性展示、标签筛选等功能。</div>
+        </div>
+        <div class="half-section imgBox">
+            <img src="img/info1.png" style="width: 448px;height: 272px;">
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-main">
+        <div class="half-section">
+            <div class="con-title">步进探索</div>
+            <div class="con-details">使用一级关联、多级关联异步迭代式加载技术，基于HTML5、AJAX、FLEX等Web技术，实现以重要节点为起点，
+                逐渐探索完成关系网的挖掘，同时提供完善的节点高亮、属性展示、标签筛选等功能。</div>
+        </div>
+        <div class="half-section imgBox">
+            <img src="img/info-2.png" style="width: 448px;height: 272px;">
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-main">
+        <div class="half-section">
+            <div class="con-title">交互浏览</div>
+            <div class="con-details">针对大规模网络中的两个或者多个节点之间的关联路径，通过最短路径计算、多级逐级交互、迭代可视化等技术，实现指定节点的潜在路径迭代式发现，
+                同时提供完善的标签筛选、层级调节、路径高亮、关联统计等功能。</div>
+        </div>
+        <div class="half-section imgBox">
+            <img src="img/info-3.png" style="width: 448px;height: 272px;">
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section-main">
+        <div class="half-section">
+            <div class="con-title">交互浏览</div>
+            <div class="con-details">构建相似关系或合作关系网络，通过频繁子图挖掘找到有意义的社区。为团伙分析、关键中介分析提供可视化界面。</div>
+        </div>
+        <div class="half-section imgBox">
+            <img src="img/info-4.png" style="width: 448px;height: 272px;">
+        </div>
+    </div>
+</div>
+<!-- 功能介绍
+   ================================================== -->
+
 <!--js放在后面提高页面加载速度-->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
+
 </body>
 </html>
