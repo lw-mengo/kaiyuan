@@ -1,134 +1,549 @@
-/* GLOBAL STYLES
--------------------------------------------------- */
-/* Padding below the footer and lighter body text */
+header .hu-btn {
+    text-transform: none;
+    overflow: visible;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: 0 !important;
+    border-radius: 20px;
+    -webkit-transition: all .5s cubic-bezier(.25, .8, .25, 1) 0s;
+    transition: all .5s cubic-bezier(.25, .8, .25, 1) 0s
+}
+
+header .hu-btn.btn-primary {
+    color: #fff;
+    background: #4ccaad;
+    border-color: #4ccaad;
+    min-width: 80px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    padding: 0 16px
+}
+
+header .hu-btn.btn-primary:hover {
+    background: #4ccaad;
+    border-color: #4ccaad
+}
+
+header .hu-btn.btn-primary-outline {
+    border-radius: 20px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    padding: 0 16px;
+    color: #00b38a;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: 0 0;
+    border-color: #00b38a
+}
+
+header .hu-btn.btn-primary-outline:hover {
+    color: #fff;
+    background: #00b38a
+}
+
+body, html {
+    height: 100%;
+    width: 100%
+}
 
 body {
-    padding-bottom: 40px;
-    color: #333;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    background-color: #eee
 }
 
+body a {
+    color: inherit;
+    text-decoration: none
+}
 
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
+body a:active, body a:hover {
+    color: inherit
+}
 
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
-.navbar-wrapper {
-    position: absolute;
+body * {
+    margin: 0;
+    padding: 0
+}
+
+body ol, body ul {
+    list-style: none
+}
+
+body div._html {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: auto
+}
+
+body div._html div._body {
+    min-height: 100%;
+    margin: 0 auto;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    position: relative
+}
+
+header * {
+    outline: 0;
+    text-decoration: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: inherit
+}
+
+header .nav-bg {
+    position: fixed;
     top: 0;
-    right: 0;
-    left: 0;
-    z-index: 20;
+    width: 100%;
+    height: 60px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    z-index: 999;
+    background-color: #1d2440
 }
 
-/* Flip around the padding for proper display in narrow viewports */
-.navbar-wrapper > .container {
-    padding-right: 0;
-    padding-left: 0;
+header .nav-bg .nav-logo > img {
+    margin-left: 40px;
+    height: 48px
 }
-.navbar-wrapper .navbar {
-    padding-right: 15px;
-    padding-left: 15px;
+
+header .nav-bg .nav-list {
+    display: none
 }
-.navbar-wrapper .navbar .container {
+
+header .nav-bg .nav-tab {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    margin: 0
+}
+
+header .nav-bg .nav-tab .items {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 164px;
+    text-decoration: none;
+    border: none;
+    color: #fff;
+    border-top: 4px solid transparent
+}
+
+header .nav-bg .nav-tab .items.item-btn {
     width: auto;
+    padding: 0 15px;
+    height: 56px;
+    line-height: 56px
 }
 
-
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
-
-/* Carousel base class */
-.carousel {
-    height: 500px;
-    margin-bottom: 60px;
+header .nav-bg .nav-tab .items span, header .nav-bg .nav-tab .items > a {
+    height: 56px;
+    font-size: 16px;
+    color: #fff;
+    list-style: none;
+    line-height: 56px;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: 10px
 }
-/* Since positioning the image, we need to help out the caption */
-.carousel-caption {
-    z-index: 10;
+
+header .nav-bg .nav-tab .items.active {
+    background-color: #374163;
+    border-top: 4px solid #00b38a
 }
 
-/* Declare heights because of positioning of img element */
-.carousel .item {
-    height: 500px;
-    background-color: #777;
+header .nav-bg .nav-tab .items.dropSelect {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column
 }
-.carousel-inner > .item > img {
+
+header .nav-bg .nav-tab .items.dropSelect .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+header .nav-bg .nav-tab .items.dropSelect > .schemeList {
+    display: none;
     position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    height: 500px;
+    top: 60px;
+    font-size: 14px
 }
 
+header .nav-bg .nav-tab .items.dropSelect > .schemeList > li {
+    width: 164px;
+    height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #374163;
+    cursor: pointer
+}
 
-/* MARKETING CONTENT
--------------------------------------------------- */
+header .nav-bg .nav-tab .items.dropSelect > .schemeList > li.current, header .nav-bg .nav-tab .items.dropSelect > .schemeList > li:hover {
+    background-color: #00b38a
+}
 
-/* Center align the text within the three columns below the carousel */
-.marketing .col-lg-4 {
-    margin-bottom: 20px;
+header .nav-bg .nav-tab .items:hover {
+    border-top: 4px solid #374163;
+    background-color: #374163
+}
+
+header .nav-bg .nav-tab .items:hover > .schemeList {
+    display: block
+}
+
+footer {
+    background: #1d2440;
+    height: 130px;
+    font-size: 14px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center
+}
+
+footer .container {
+    margin: 40px auto 0;
+    padding: 0 15px
+}
+
+footer .row {
+    margin: 0 -15px
+}
+
+footer a, footer a:hover, footer p {
+    color: #fff !important;
+    text-align: center
+}
+
+@media screen and (max-width: 767px) {
+    header .nav-bg .nav-list {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 30px
+    }
+
+    header .nav-bg .nav-list img {
+        width: 26px;
+        height: 23px
+    }
+
+    header .nav-bg .nav-tab {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #1d2440;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column
+    }
+
+    header .nav-bg .nav-tab .items {
+        width: 144px
+    }
+
+    header .nav-bg .nav-tab .items.dropSelect {
+        position: relative
+    }
+
+    header .nav-bg .nav-tab .items.dropSelect.mbActive .schemeList {
+        display: block;
+        position: absolute;
+        top: -4px;
+        left: -144px
+    }
+
+    header .nav-bg .nav-tab .items.dropSelect.mbActive .schemeList li {
+        width: 144px
+    }
+
+    header .nav-bg .nav-tab #logined .schemeList {
+        display: block;
+        top: 56px
+    }
+
+    header .nav-bg .nav-tab #logined .schemeList li {
+        width: 144px
+    }
+}
+
+.main {
+    margin-top: 60px;
+    background-color: #000
+}
+
+.main .mainContent {
+    color: #fff
+}
+
+.main .mainContent .intro {
+    height: 100%;
+    background: url(../img/about-banner.png) no-repeat;
+    background-size: 100% 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 70px 220px;
+    margin: auto
+}
+
+.main .mainContent .intro .intro-det {
+    width: 1000px;
+    margin: auto
+}
+
+.main .mainContent .intro .intro-det span {
+    display: block;
     text-align: center;
+    font-size: 40px;
+    margin-bottom: 48px
 }
-.marketing h2 {
-    font-weight: normal;
+
+.main .mainContent .intro .intro-det p {
+    padding-bottom: 20px;
+    text-align: left;
+    line-height: 30px;
+    font-size: 20px
 }
-.marketing .col-lg-4 p {
+
+.main .mainContent .container-btm {
+    margin: auto;
+    padding: 0 220px 50px;
+
+}
+
+.main .mainContent .container-btm .container-det {
+    width: 1000px;
+    margin: auto
+}
+
+.main .mainContent .container-btm .container-det .contact-us {
+    padding-top: 56px
+}
+
+.main .mainContent .container-btm .container-det .contact-us .left {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+
+.main .mainContent .container-btm .container-det .contact-us .left .title {
+    margin: 0 0 23px;
+    text-align: left;
+    line-height: 30px;
+    font-size: 32px
+}
+
+.main .mainContent .container-btm .container-det .contact-us .left .detail > li {
+    font-size: 20px;
+    color: #fff;
+    opacity: .7;
+    margin: 18px 0;
+    line-height: 30px
+}
+
+.main .mainContent .container-btm .container-det .contact-us .left .detail > li i {
+    width: 16px;
+    height: 18px;
+    display: inline-block;
     margin-right: 10px;
-    margin-left: 10px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat
+}
+
+.main .mainContent .container-btm .container-det .contact-us .left .detail > li i.icon-phone {
+    background-image: url(../img/icon-phone.png)
 }
 
 
-/* Featurettes
-------------------------- */
 
-.featurette-divider {
-    margin: 80px 0; /* Space out the Bootstrap <hr> more */
+.main .mainContent .container-btm .container-det .contact-us .right {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+    font-size: 12px
 }
 
-/* Thin out the marketing headings */
-.featurette-heading {
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: -1px;
+.main .mainContent .container-btm .container-det .contact-us .right img {
+    width: 128px;
+    height: 128px;
+    margin-top: 12px
 }
 
-
-/* RESPONSIVE CSS
--------------------------------------------------- */
-
-@media (min-width: 768px) {
-    /* Navbar positioning foo */
-    .navbar-wrapper {
-        margin-top: 20px;
-    }
-    .navbar-wrapper .container {
-        padding-right: 15px;
-        padding-left: 15px;
-    }
-    .navbar-wrapper .navbar {
-        padding-right: 0;
-        padding-left: 0;
-    }
-
-    /* The navbar becomes detached from the top, so we round the corners */
-    .navbar-wrapper .navbar {
-        border-radius: 4px;
-    }
-
-    /* Bump up size of carousel content */
-    .carousel-caption p {
-        margin-bottom: 20px;
-        font-size: 21px;
-        line-height: 1.4;
-    }
-
-    .featurette-heading {
-        font-size: 50px;
-    }
+.main .mainContent .container-btm .container-det .company-map {
+    margin: 30px auto
 }
 
-@media (min-width: 992px) {
-    .featurette-heading {
-        margin-top: 120px;
+.main .mainContent .container-btm .container-det .company-map img {
+    display: block;
+    width: 100%
+}
+
+@media screen and (max-width: 767px) {
+    .main .mainContent .intro {
+        margin: auto;
+        padding: 16px 20px
+    }
+
+    .main .mainContent .intro .intro-det {
+        width: 100%;
+        margin: auto
+    }
+
+    .main .mainContent .intro .intro-det span {
+        font-size: 20px;
+        margin-bottom: 28px
+    }
+
+    .main .mainContent .intro .intro-det p {
+        padding-bottom: 20px;
+        text-align: left;
+        line-height: 30px;
+        font-size: 14px
+    }
+
+    .main .mainContent .container-btm {
+        margin: auto;
+        padding: 0 20px 20px;
+    }
+
+    .main .mainContent .container-btm .container-det {
+        width: 100%
+    }
+
+    .main .mainContent .container-btm .container-det .contact-us {
+        padding-top: 30px
+    }
+
+    .main .mainContent .container-btm .container-det .contact-us .left {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column
+    }
+
+    .main .mainContent .container-btm .container-det .contact-us .left .title {
+        margin: 0 0 23px;
+        text-align: left;
+        line-height: 28px;
+        font-size: 20px
+    }
+
+    .main .mainContent .container-btm .container-det .contact-us .left .detail > li {
+        font-size: 14px;
+        margin: 0;
+        line-height: 30px
+    }
+
+    .main .mainContent .container-btm .container-det .contact-us .left .detail > li:not(:last-child) {
+        margin-bottom: 18px
+    }
+
+    .main .mainContent .container-btm .container-det .contact-us .left .detail > li i {
+        width: 14px;
+        height: 16px;
+        margin-right: 10px
+    }
+
+    .main .mainContent .container-btm .container-det .contact-us .left .detail > li i.icon-address {
+        width: 11px;
+        height: 14px
+    }
+
+    .main .mainContent .container-btm .container-det .contact-us .right img {
+        width: 80px;
+        height: 80px
+    }
+
+    .main .mainContent .container-btm .container-det .company-map {
+        margin: 30px auto
     }
 }

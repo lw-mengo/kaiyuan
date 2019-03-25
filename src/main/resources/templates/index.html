@@ -1,110 +1,238 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="author" content="mengo">
-    <title>知识图谱大数据可视化分析挖掘平台</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <title>首页</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="http://www.haizhi.com//public/css/animate.min.css">
+    <link type="text/css" rel="stylesheet" href="main/common.css"/>
+    <link type="text/css" rel="stylesheet" href="main/index.css"/>
+    <script src="main/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="main/TweenLite.min.js"></script>
+    <script type="text/javascript" src="main/lem_counter.js"></script>
+    <script src="main/fullPage.min.js"></script>
+    <script src="main/idangerous.min.js"></script>
+    <script src="main/swiper.animate1.min.js"></script>
+    <script type='text/javascript' src='main/jquery.particleground.min.js'></script>
+    <script src="main/layer.js"></script>
+    <script src="main/jquery.mmenu.js"></script>
+    <link type="text/css" rel="stylesheet" href="main/jquery.mmenu.css"/>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/tryout.css">
+
 </head>
 <body>
-<div class="site-wrapper">
-    <div class="site-wrapper-inner">
-        <div class="cover-container">
-            <div class="masthead clearfix">
-                <div class="inner">
-                    <h3 class="masthead-brand"><img src="img/l.png" style="width: 90px;margin-left: -200px"></h3>
-                    <nav>
-                        <ul class="nav masthead-nav">
-                            <li class="active"><a href="#">首页</a></li>
-                            <li><a href="/product">产品</a></li>
-                            <li><a href="/customization">定制</a></li>
-                            <li><a href="/about">关于我们</a></li>
-                        </ul>
-                    </nav>
-                    <nav>
-                        <ul class="nav masthead-nav" style="margin-right: -400px;">
-                            <li><a href="/login">登录</a></li>
-                            <li><a href="/login">申请试用</a></li>
-                        </ul>
-                    </nav>
+<!-- header S -->
+<header>
+    <div class="nav-bg" id="navHeader">
+        <a  class="nav-logo" href="/"><img src="img/l.png" alt="kaiyuan"></a>
+        <div class="nav-list"><img src="img/icon-menu.png" alt=""></div>
+        <div class="nav-tab">
+            <div class="items dropSelect coreProduct">
+                <a href="/">
+                    <span>网站首页<i class="icon"></i></span>
+                </a>
+            </div>
+            <div class="items dropSelect solution">
+                <a href="/product">
+                    <span>核心产品<i class="icon"></i></span>
+                </a>
+            </div>
+            <a class="items" href="/customization">
+                <span>客户定制<i class="icon"></i></span>
+            </a>
+            <a class="items" href="/about">
+                <span>关于我们<i class="icon"></i></span>
+            </a>
+            <a class="items item-btn" href="/login">
+                <button class="hu-btn btn-primary-outline">
+                    登录
+                </button>
+            </a>
+            <a class="items item-btn" href="javascript();">
+                <button class="hu-btn btn-primary">
+                    申请试用
+                </button>
+            </a>
+        </div>
+    </div>
+</header>
+
+
+<script src="http://www.haizhi.com//public/js/jr.js"></script>
+<div id="pageContain">
+    <div class="page page1 current">
+        <div class="contain">
+            <!--  banner 轮播S -->
+            <div class="swiper-container box">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide slide2">
+                        <h1 class="abs">BDP</h1>
+                        <h3 class="abs ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s"
+                            swiper-animate-delay="0.2s">知识图谱大数据可视化分析挖掘平台</h3>
+                        <p class="abs clearfix itemspan">
+                            <i class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s"
+                               swiper-animate-delay="0.4s"><em class="em1">Big Date</em><em class="point"> ● </em><em
+                                    class="em2">Deep Insights</em></i>
+                            <span class="ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="0.5s"
+                                  swiper-animate-delay="0.4s">
+            <label><em class="em1">海    量    数    据  </em><em class="point">●</em> <em
+                    class="em2"> 分    析    极    致</em></label>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="bprev"></div>
+                <div class="bnext"></div>
+                <div class="pagination"></div>
+            </div>
+            <script type="text/javascript">
+                $('.counter').lemCounter();
+            </script>
+            <!-- banner 轮播 E -->
+        </div>
+        <img src="http://www.haizhi.com//public/images/mouse.png" class="banner_sj">
+        <div class="page_scollor">滚动</div>
+    </div>
+
+    <div class="page page2">
+        <div class="contain">
+            <!-- titl S -->
+            <div class="w_title_com">
+                <h1>Core product<i></i></h1>
+                <h2>产品特色<i></i></h2>
+            </div>
+            <!-- titl E
+            feature S -->
+            <div class="wrap feature abs">
+                <div class="feature_left">
+                    <img src="http://www.haizhi.com//public/images/feature.png">
+                </div>
+                <div class="feature_right">
+                    <h1>交互浏览 </h1>
+                    <p>使用大图异步加载技术，大图空间布局技术，无缝伸缩技术，流式数据加载与展示技术，实现大规模网络全图展示，同时提供强大的属性展示、标签筛选等功能。</p>
                 </div>
             </div>
-            <div class="inner cover">
-                <h1>知识图谱大数据可视化分析挖掘平台</h1>
-                <img src="img/indexbg.png" style="margin-top: 30px;height: 170px;"/>
+            <!-- feature E -->
+        </div>
+    </div>
+
+    <div class="page page3">
+        <div class="contain">
+
+            <!-- titl S -->
+            <div class="w_title_com">
+                <h1>Core product<i></i></h1>
+                <h2>产品特色<i></i></h2>
+            </div>
+            <div class="wrap feature abs">
+                <div class="feature_left">
+                    <img src="http://www.haizhi.com//public/images/page3_right.png">
+                </div>
+                <div class="feature_right">
+                    <h1>步进探索</h1>
+                    <p> 使用一级关联、多级关联异步迭代式加载技术，基于HTML5、AJAX、FLEX等Web技术，实现以重要节点为起点，逐渐探索完成关系网的挖掘，同时提供完善的节点高亮、属性展示、标签筛选等功能。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page page4">
+        <div class="contain">
+
+            <div class="particles"></div>
+            <!-- titl S -->
+            <div class="w_title_com">
+                <h1>Core product<i></i></h1>
+                <h2>产品特色<i></i></h2>
+            </div>
+            <div class="wrap feature abs">
+                <div class="feature_left">
+                    <img src="http://www.haizhi.com//public/images/page4_right.png">
+                </div>
+                <div class="feature_right">
+                    <h1>路径发现</h1>
+                    <p>
+                        针对大规模网络中的两个或者多个节点之间的关联路径，通过最短路径计算、多级逐级交互、迭代可视化等技术，实现指定节点的潜在路径迭代式发现，同时提供完善的标签筛选、层级调节、路径高亮、关联统计等功能。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page page5">
+        <div class="contain">
+
+
+            <!-- titl S -->
+            <div class="w_title_com">
+                <h1>Core product<i></i></h1>
+                <h2>产品特色<i></i></h2>
+            </div>
+            <div class="wrap feature abs">
+                <div class="feature_left">
+                    <img src="http://www.haizhi.com//public/images/page5_right.png">
+                </div>
+                <div class="feature_right">
+                    <h1>社区挖掘</h1>
+                    <p>构建相似关系或合作关系网络，通过频繁子图挖掘找到有意义的社区。为团伙分析、关键中介分析提供可视化界面。</p>
+                </div>
             </div>
 
 
+        </div>
+    </div>
 
-            <!--页脚信息-->
-            <div class="mastfoot">
-                <div class="inner">
-                    <p>Copyright © 2019 GraphViz.cn . All rights reserved.</p>
+    <div class="page page6">
+        <div class="contain">
+            <!-- titl S -->
+            <div class="w_title_com">
+                <h1>Core product<i></i></h1>
+                <h2>产品特色<i></i></h2>
+            </div>
+            <div class="wrap feature abs">
+                <div class="feature_left">
+                    <img src="http://www.haizhi.com//public/images/page6_right.png">
+                </div>
+                <div class="feature_right">
+                    <h1>适用场景</h1>
+                    <p>智慧交通</p>
+                    <p>互联网信息传播</p>
+                    <p>电信诈骗分析</p>
+                    <p>用户画像</p>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="link-item">
+                    <a href="avascript();" target="_self">网站首页</a>
+                    <a href="avascript();"
+                       target="_self">客户服务</a>
+                    <a href="avascript();"
+                       target="_self">核心产品</a>
+                    <a href="avascript();"
+                       target="_self">关于我们</a>
+                    <a href="javascript();"
+                       target="_self" class="nobor">加入我们</a>
+                </div>
+                <div class="power">
+                     Copyright &copy; 2019 GraphViz.cn . All rights reserved. &nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="section">
-    <div class="section-main">
-        <div class="half-section">
-            <div class="con-title">交互浏览</div>
-            <div class="con-details">使用大图异步加载技术，大图空间布局技术，无缝伸缩技术，流式数据加载与展示技术，
-                实现大规模网络全图展示，同时提供强大的属性展示、标签筛选等功能。</div>
-        </div>
-        <div class="half-section imgBox">
-            <img src="img/info1.png" style="width: 448px;height: 272px;">
-        </div>
-    </div>
-</div>
-<div class="section">
-    <div class="section-main">
-        <div class="half-section">
-            <div class="con-title">步进探索</div>
-            <div class="con-details">使用一级关联、多级关联异步迭代式加载技术，基于HTML5、AJAX、FLEX等Web技术，实现以重要节点为起点，
-                逐渐探索完成关系网的挖掘，同时提供完善的节点高亮、属性展示、标签筛选等功能。</div>
-        </div>
-        <div class="half-section imgBox">
-            <img src="img/info-2.png" style="width: 448px;height: 272px;">
-        </div>
-    </div>
-</div>
-<div class="section">
-    <div class="section-main">
-        <div class="half-section">
-            <div class="con-title">交互浏览</div>
-            <div class="con-details">针对大规模网络中的两个或者多个节点之间的关联路径，通过最短路径计算、多级逐级交互、迭代可视化等技术，实现指定节点的潜在路径迭代式发现，
-                同时提供完善的标签筛选、层级调节、路径高亮、关联统计等功能。</div>
-        </div>
-        <div class="half-section imgBox">
-            <img src="img/info-3.png" style="width: 448px;height: 272px;">
-        </div>
-    </div>
-</div>
-<div class="section">
-    <div class="section-main">
-        <div class="half-section">
-            <div class="con-title">交互浏览</div>
-            <div class="con-details">构建相似关系或合作关系网络，通过频繁子图挖掘找到有意义的社区。为团伙分析、关键中介分析提供可视化界面。</div>
-        </div>
-        <div class="half-section imgBox">
-            <img src="img/info-4.png" style="width: 448px;height: 272px;">
-        </div>
-    </div>
-</div>
-<!-- 功能介绍
-   ================================================== -->
 
-<!--js放在后面提高页面加载速度-->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-
-
+<ul id="navBar">
+    <li><i>首页</i></li>
+    <li><i><!--产品特色--></i></li>
+    <li><i><!--产品特色--></i></li>
+    <li><i><!--产品特色--></i></li>
+    <li><i><!--产品特色--></i></li>
+    <li><i><!--产品特色--></i></li>
+</ul>
+<script type='text/javascript' src='http://www.haizhi.com//public/js/index.js'></script>
 </body>
 </html>

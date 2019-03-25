@@ -21,6 +21,11 @@ public class TestController {
         return "login";
     }
 
+    @GetMapping("tryout")
+    public String tryout() {
+        return "tryout";
+    }
+
     @RequestMapping("result")
     public String result() {
         return "result";
@@ -37,36 +42,37 @@ public class TestController {
     }
 
     @RequestMapping("result_community")
-    public String result_community(){
+    public String result_community() {
         return "result_community";
     }
 
     @RequestMapping("about")
-    public String about(){
-        return "about_new";
+    public String about() {
+        return "about";
     }
 
     @GetMapping("product")
-    public String product(){
+    public String product() {
         return "result_community";
     }
 
     @GetMapping("customization")
-    public String customization(){
+    public String customization() {
         return "customization";
     }
+
     @GetMapping("customization_browse")
-    public String customizationBrowse(){
+    public String customizationBrowse() {
         return "customization_browse";
     }
 
     @GetMapping("customization_mission")
-    public String customizationMission(){
+    public String customizationMission() {
         return "customization_mission";
     }
 
     @GetMapping("customization_result")
-    public String customizationResult(){
+    public String customizationResult() {
         return "customization_result";
     }
 
