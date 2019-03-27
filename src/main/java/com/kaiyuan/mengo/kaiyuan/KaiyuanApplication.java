@@ -17,4 +17,6 @@ public class KaiyuanApplication extends SpringBootServletInitializer {
         return builder.sources(KaiyuanApplication.class);
 
     }
+
+    
 }

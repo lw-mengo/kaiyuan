@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zn-CN">
+<html lang="zn-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
@@ -9,34 +9,48 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/result.css">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/tryout.css">
+    <link rel="shortcut icon" href="img/ico_new.ico" type="image/x-icon">
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" style="margin-bottom: 10px;" href="#"><img src="img/l.png"
-                                                                               style="width: 40px;display: inline-block;">知识图谱大数据可视化分析挖掘平台</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/">首页</a></li>
-                <li><a href="/login">用户登录</a></li>
-
-            </ul>
+<header>
+    <div class="nav-bg" id="navHeader">
+        <a class="nav-logo" href="/"><img src="img/logo.png" alt="kaiyuan"></a>
+        <div class="nav-list"><img src="img/icon-menu.png" alt=""></div>
+        <div class="nav-tab">
+            <div class="items dropSelect coreProduct">
+                <a href="/">
+                    <span>网站首页<i class="icon"></i></span>
+                </a>
+            </div>
+            <div class="items dropSelect solution">
+                <a href="/product">
+                    <span>核心产品<i class="icon"></i></span>
+                </a>
+            </div>
+            <a class="items" href="/customization">
+                <span>客户定制<i class="icon"></i></span>
+            </a>
+            <a class="items" href="/about">
+                <span>关于我们<i class="icon"></i></span>
+            </a>
+            <a class="items item-btn" href="/login">
+                <button class="hu-btn btn-primary-outline">
+                    登录
+                </button>
+            </a>
+            <a class="items item-btn" href="/tryout">
+                <button class="hu-btn btn-primary">
+                    申请试用
+                </button>
+            </a>
         </div>
     </div>
-</nav>
+</header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-1 sidebar">
+        <div class="col-sm-3 col-md-1 sidebar" style="margin-top: 10px;">
             <ul class="nav nav-sidebar">
                 <li class="active"><a href="#">导入数据<span class="sr-only">(current)</span></a></li>
                 <li><a href="/customization_browse">数据浏览</a></li>
@@ -63,8 +77,8 @@
                     <h2>数据预览</h2>
                     <table class="table table-bordered">
                         <thead>
-                        <tr>
-                            <th>字段1</th>
+                        <tr th:each="title:${title}">
+                            <th th:text="${title}">字段1</th>
                             <th>字段2</th>
                             <th>字段3</th>
                             <th>字段4</th>

@@ -1,6 +1,8 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
+import com.opencsv.CSVReader;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 @Controller
 public class TestController {
@@ -57,7 +62,20 @@ public class TestController {
     }
 
     @GetMapping("customization")
-    public String customization() {
+    public String customization(Model model) {
+        String filePath = "F:\\upload\\movieV3.csv";
+        String[] titles;
+        try {
+            CSVReader reader = new CSVReader(new FileReader(filePath));
+            String [] nextLine;
+            if ((nextLine = reader.readNext())!=null){
+               titles = nextLine;
+               model.addAttribute("title",titles);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "customization";
     }
 
