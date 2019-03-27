@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class TestController {
@@ -63,15 +65,29 @@ public class TestController {
 
     @GetMapping("customization")
     public String customization(Model model) {
-        String filePath = "F:\\upload\\movieV3.csv";
+        String filePath = "F:\\upload\\iris.csv";//读取文件
         String[] titles;
         try {
+            //使用opencsv
             CSVReader reader = new CSVReader(new FileReader(filePath));
-            String [] nextLine;
-            if ((nextLine = reader.readNext())!=null){
-               titles = nextLine;
-               model.addAttribute("title",titles);
+            String[] nextLine = reader.readNext();
+            List<String[]> list = new ArrayList<>();
+            if (nextLine != null) {
+                titles = nextLine;
+                model.addAttribute("title", titles);
+            } else {
+                return "fail";
             }
+            for (int i = 0; i < 15; i++) {
+                String[] next = reader.readNext();
+                if (next != null) {
+                    list.add(next);
+                }
+            }
+            int length = list.size();
+            System.out.println(length);
+            model.addAttribute("dataList", list);
+
 
         } catch (IOException e) {
             e.printStackTrace();

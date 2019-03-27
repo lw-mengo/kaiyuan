@@ -77,51 +77,18 @@
                     <h2>数据预览</h2>
                     <table class="table table-bordered">
                         <thead>
-                        <tr th:each="title:${title}">
-                            <th th:text="${title}">字段1</th>
-                            <th>字段2</th>
-                            <th>字段3</th>
-                            <th>字段4</th>
-                            <th>字段5</th>
+                        <tr>
+                            <th th:each="titles:${title}">
+                                <p th:text="${titles}" style="text-align: center"></p>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
+                        <tr th:each="data:${dataList}">
+                            <td th:each="d:${data}">
+                                <p th:text="${d}"></p>
+                            </td>
                         </tr>
-                        <tr>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                        </tr>
-                        <tr>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                        </tr>
-                        <tr>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                        </tr>
-                        <tr>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                            <td>数据1</td>
-                        </tr>
-
                         </tbody>
                     </table>
                 </div>

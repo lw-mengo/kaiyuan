@@ -46,7 +46,7 @@ html, body {
 
 
 .page1 .slide1 {
-    background: #242923 url(../images/banner1.jpg) no-repeat center center;
+    background: #242923 no-repeat center center;
 }
 
 .page1 .slide1 h1 {
@@ -142,7 +142,7 @@ html, body {
 
 
 .page1 .slide2 {
-    background: #242923 url(../images/banner2.jpg) no-repeat center center;
+    background: #242923 no-repeat center center;
 }
 
 .page1 .slide2 h1 {
@@ -238,7 +238,7 @@ html, body {
     left: 0;
     top: 12px;
     color: #fff;
-    background: url(images/banner2-i.png) no-repeat;
+    background: no-repeat;
 }
 
 .page1 .slide2 p i em {
@@ -279,7 +279,7 @@ html, body {
 }
 
 .page1 .slide3 {
-    background: #242923 url(../images/banner3.jpg) no-repeat center center;
+    background: #242923 no-repeat center center;
 }
 
 .page1 .slide3 h1 {
@@ -343,7 +343,7 @@ html, body {
     letter-spacing: 5px;
     font-family: "MyriadPro";
     line-height: 22px;
-    background: url(../images/banner3-i.png) center no-repeat;
+    background: center no-repeat;
     font-size: 26px;
     display: block;
     font-style: normal;
@@ -483,7 +483,7 @@ html, body {
 }
 
 .page2 {
-    background: #fff url(../images/page2bg.jpg) no-repeat center center;
+    background: #fff no-repeat center center;
 }
 
 .feature {
@@ -540,11 +540,11 @@ html, body {
 .feature_item li i {
     width: 51px;
     height: 51px;
-    background: url(../images/indexico.png) no-repeat 0 -45px;
+    background: no-repeat 0 -45px;
 }
 
 .feature_item li u {
-    background: url(../images/indexico.png) no-repeat -5px -3px;
+    background: no-repeat -5px -3px;
     width: 30px;
     height: 30px;
     top: 50%;
@@ -562,7 +562,7 @@ html, body {
 
 /* page3 */
 .page3 {
-    background: #f5f7fa url(../images/page3bg.jpg) no-repeat center center;
+    background: #f5f7fa no-repeat center center;
 }
 
 .page3 .feature_left {
@@ -591,7 +591,7 @@ html, body {
 
 /* page5 */
 .page5 {
-    background: #f5f7fa url(../images/page5bg.jpg) no-repeat center center;
+    background: #f5f7fa no-repeat center center;
 }
 
 .page5 .feature_left {
@@ -606,7 +606,7 @@ html, body {
 
 /* page6 */
 .page6 {
-    background: #f5f7fa url(../images/page6bg.jpg) no-repeat center center;
+    background: #f5f7fa no-repeat center center;
 }
 
 .page6 .feature_left {
