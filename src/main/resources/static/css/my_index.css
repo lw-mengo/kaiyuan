@@ -235,7 +235,6 @@ html, body {
     left: 0;
     top: 12px;
     color: #fff;
-    background: url(images/banner2-i.png) no-repeat;
 }
 
 .page1 .slide2 p i em {
@@ -275,9 +274,6 @@ html, body {
     right: 0;
 }
 
-.page1 .slide3 {
-    background: #242923 url(../images/banner3.jpg) no-repeat center center;
-}
 
 .page1 .slide3 h1 {
     font-size: 491px;
@@ -340,7 +336,6 @@ html, body {
     letter-spacing: 5px;
     font-family: "MyriadPro";
     line-height: 22px;
-    background: url(../images/banner3-i.png) center no-repeat;
     font-size: 26px;
     display: block;
     font-style: normal;
@@ -479,10 +474,6 @@ html, body {
     display: none;
 }
 
-.page2 {
-    background: #fff url(../images/page2bg.jpg) no-repeat center center;
-}
-
 .feature {
     top: 35%;
     left: 50%;
@@ -537,11 +528,9 @@ html, body {
 .feature_item li i {
     width: 51px;
     height: 51px;
-    background: url(../images/indexico.png) no-repeat 0 -45px;
 }
 
 .feature_item li u {
-    background: url(../images/indexico.png) no-repeat -5px -3px;
     width: 30px;
     height: 30px;
     top: 50%;
@@ -558,9 +547,6 @@ html, body {
 }
 
 /* page3 */
-.page3 {
-    background: #f5f7fa url(../images/page3bg.jpg) no-repeat center center;
-}
 
 .page3 .feature_left {
     float: right;
@@ -588,7 +574,7 @@ html, body {
 
 /* page5 */
 .page5 {
-    background: #f5f7fa url(../images/page5bg.jpg) no-repeat center center;
+    background: #f5f7fa no-repeat center center;
 }
 
 .page5 .feature_left {
@@ -603,7 +589,7 @@ html, body {
 
 /* page6 */
 .page6 {
-    background: #f5f7fa url(../images/page6bg.jpg) no-repeat center center;
+    background: #f5f7fa  no-repeat center center;
 }
 
 .page6 .feature_left {

@@ -26,4 +26,3 @@ $("[placeholder]").focus(function() {
     });
   
 })
-<![endif]-->
