@@ -1,508 +1,173 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
+<meta charset="UTF-8" />
 <head>
-    <meta charset="utf-8"/>
-    <title>北京海致网聚</title>
-    <meta name="keywords" content="关键词"/>
-    <meta name="description" content="海致描述"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <link rel="stylesheet" href="http://www.haizhi.com//public/css/animate.min.css"/>
-    <link type="text/css" rel="stylesheet" href="http://www.haizhi.com//public/css/common.css"/>
-    <link type="text/css" rel="stylesheet" href="http://www.haizhi.com//public/css/index.css"/>
-    <script src="http://www.haizhi.com//public/js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="http://www.haizhi.com//public/js/TweenLite.min.js"></script>
-    <script type="text/javascript" src="http://www.haizhi.com//public/js/lem_counter.js"></script>
-    <script src="http://www.haizhi.com//public/js/fullPage.min.js"></script>
-    <script src="http://www.haizhi.com//public/js/idangerous.min.js"></script>
-    <script src="http://www.haizhi.com//public/js/swiper.animate1.min.js"></script>
-    <script type="text/javascript" src="http://www.haizhi.com//public/js/jquery.particleground.min.js"></script>
-    <script src="http://www.haizhi.com//public/js/layer/layer.js"></script>
-    <script src="http://www.haizhi.com//public/js/jquery.mmenu.js"></script>
-    <link type="text/css" rel="stylesheet" href="http://www.haizhi.com//public/css/jquery.mmenu.css"/>
+    <title>文件上传</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.css"
+          rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
-<body>
-<!-- header S -->
-<div class="header">
-    <div class="wrap1820">
-        <div class="logo">
-            <a href="http://www.haizhi.com/"><img src="http://www.haizhi.com//public/images/logo.png"
-                                                  class="simg_logo"/></a>
+<body class="container">
+<br />
+<span id="time"></span>
+<div class="row">
+    <input class="btn btn-info btn-xs" type="file" name="file" /><br />
+    <div class="col-lg-5"
+         style="padding-left: 0; padding-right: 0; margin-bottom: 0px;">
+        <div class="progress progress-striped active" style="display: ">
+            <div id="progressBar" class="progress-bar progress-bar-success"
+                 role="progressbar" aria-valuemin="0" aria-valuenow="0"
+                 aria-valuemax="100" style="width: 20%"></div>
         </div>
-        <ul class="nav_menu" id="menu">
-            <li class="active pullCtrl"><a href="http://www.haizhi.com/" target="_self">网站首页</a> <i class="line"></i>
-            </li>
-            <li class="pullCtrl"><a
-                    href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=10"
-                    target="_self">核心产品</a> <i class="line"></i></li>
-            <li class="pullCtrl"><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=6"
-                                    target="_self">客户服务</a> <i class="line"></i></li>
-            <li class="pullCtrl"><a
-                    href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=17"
-                    target="_self">关于我们</a> <i class="line"></i></li>
-            <li class="last pullCtrl"><a
-                    href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=20"
-                    target="_self">加入我们</a> <i class="line"></i></li>
-        </ul>
-        <div class="r_panel">
-            <span class="tel"><i></i><u>400-604-6699</u></span>
-            <span class="wx"></span>
-            <a class="hidebtn" href="javascript:void(0);"> <i class="bar-top bar-right"></i> <i class="bar-center"></i>
-                <i class="bar-bottom bar-right"></i> </a>
-        </div>
-        <div class="wx_img_big"></div>
-        <a href="#menuwap">
-            <div class="m_menu"></div>
-        </a>
     </div>
-    <div class="pull_header">
-        <div class="pullDown"></div>
-        <div class="pullDown h60">
-            <div class="wrap7 hwrap">
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=10" target="_self">BDP大数据可视化分析平台</a>
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=11" target="_self">警务大数据应用模型超市</a>
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=12" target="_self">公安情报智能研判系统</a>
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=13" target="_self">公安知识图谱</a>
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=14" target="_self">警务机器学习</a>
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=15" target="_self"
-                   class="last">智慧数据大屏</a>
-            </div>
-        </div>
-        <div class="pullDown"></div>
-        <div class="pullDown h60">
-            <div class="wrap8 hwrap">
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=19" target="_self">公司简介</a>
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=17" target="_self">海致动态</a>
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=18" target="_self">海致荣誉</a>
-                <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=21" target="_self"
-                   class="last">联系我们</a>
-            </div>
-        </div>
-        <div class="pullDown"></div>
-    </div>
+    <!-- 显示上传速度 -->
+    <div id="showInfo" class="col-lg-2">0KB/s</div>
 </div>
-<div id="menuwap" class="menuwap">
-    <ul>
-        <li><a href="http://www.haizhi.com/" target="_self">网站首页</a></li>
-        <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=10"
-               target="_self">核心产品</a>
-            <ul>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=10"
-                       target="_self">BDP大数据可视化分析平台</a></li>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=11"
-                       target="_self">警务大数据应用模型超市</a></li>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=12"
-                       target="_self">公安情报智能研判系统</a></li>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=13"
-                       target="_self">公安知识图谱</a></li>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=14"
-                       target="_self">警务机器学习</a></li>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=15"
-                       target="_self">智慧数据大屏</a></li>
-            </ul>
-        </li>
-        <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=6"
-               target="_self">客户服务</a></li>
-        <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=17"
-               target="_self">关于我们</a>
-            <ul>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=19"
-                       target="_self">公司简介</a></li>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=17"
-                       target="_self">海致动态</a></li>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=18"
-                       target="_self">海致荣誉</a></li>
-                <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=21"
-                       target="_self">联系我们</a></li>
-            </ul>
-        </li>
-        <li><a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=20"
-               target="_self">加入我们</a></li>
-    </ul>
+<!-- 显示文件信息 -->
+<div id="showFieInfo" class="row">
+    <label name="upfileName"></label><br />
+    <label name="upfileSize"></label><br />
+    <label name="upfileType"></label><br />
 </div>
-<!-- 弹框部分S -->
-<div class="dialog_hide">
-    <div class="container">
-        <div class="left">
-            <span class="redTitle">准备好开始了吗?</span>
-            <p class="title">进一步，了解海致警务大数据</p>
-            <p class="info_des">海致BDP为企业提供一站式的大数据分析平台，帮助企业高效率、低成本的 建立数据应用体系，其灵活、易用、高性能和一站式的特性，让企业轻松实
-                现数据驱动的精细化运营，全面激活业务增长，提升经营绩效！</p>
-            <div class="footTitle">
-                <label>海致BDP警务大数据</label>
-            </div>
-            <p class="info add"><i></i><label>深圳市南山区学府路5号芒果网大厦905</label></p>
-            <p class="info"><label>上海市静安区武宁南路1号越商大厦2103室</label></p>
-            <p class="info"><label>湖北省武汉市江汉区菱角湖万达广场A2座1508室</label></p>
-            <p class="info"><label>北京市海淀区学院路甲5号768创意园B座8号门（总部）</label></p>
-            <p class="info hottel"><i></i><label>400-604-6699</label></p>
-        </div>
-        <div class="right">
-            <p class="title">请填写您的信息</p>
-            <p class="line"><input type="text" class="inputText" id="hz_uname_top" placeholder="您的姓名"/></p>
-            <p class="line"><input type="text" class="inputText" id="hz_dw_top" placeholder="公司名称"/></p>
-            <p class="line"><input type="text" class="inputText" id="hz_tel_top" placeholder="您的电话"/></p>
-            <p class="line"><input type="text" class="inputText" id="hz_email_top" placeholder="您的邮箱"/></p>
-            <p class="line"><textarea class="textArea" id="hz_xq_top" placeholder="您想解决什么问题"></textarea></p>
-            <p class="line"><input type="button" class="inputBtn" value="立即提交" id="go_submit"/></p>
-        </div>
-    </div>
-    <img id="listCloseBtn" src="http://www.haizhi.com//public/images/closeIcon.png"/>
+<div class="row">
+    <input class="btn btn-success btn-xs" type="button" name="upload" value="上传" />
+    <input class="btn btn-success btn-xs" type="button" name="cancelUpload" value="取消" />
 </div>
-<!-- header E -->
-<script src="http://www.haizhi.com//public/js/common.js"></script>
-<script>
-    function is_mobile() {
-        var regex_match = /(nokia|iphone|iPad|ipad|android|motorola|^mot-|softbank|foma|docomo|kddi|up.browser|up.link|htc|dopod|blazer|netfront|helio|hosin|huawei|novarra|CoolPad|webos|techfaith|palmsource|blackberry|alcatel|amoi|ktouch|nexian|samsung|^sam-|s[cg]h|^lge|ericsson|philips|sagem|wellcom|bunjalloo|maui|symbian|smartphone|midp|wap|phone|windows ce|iemobile|^spice|^bird|^zte-|longcos|pantech|gionee|^sie-|portalmmm|jigs browser|hiptop|^benq|haier|^lct|operas*mobi|opera*mini|320x320|240x320|176x220)/i;
-        var u = navigator.userAgent;
-        if (null == u) {
-            return true;
-        }
-        var result = regex_match.exec(u);
-        if (null == result) {
-            return false
-        } else {
-            return true
-        }
-    }
-
-    if (is_mobile()) {
-        document.location.href = "http://" + document.domain + '/index.php?m=wap';
-    }
-
-</script>
-<script src="http://www.haizhi.com//public/js/jr.js"></script>
-<div id="pageContain">
-    <div class="page page1 current">
-        <div class="contain">
-            <!--  banner 轮播S -->
-            <div class="swiper-container box">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide slide1">
-                        <h1 class="abs">BDP</h1>
-                        <h2 class="ani abs" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s"
-                            swiper-animate-delay="0.3s"> Big Data Deep Insights</h2>
-                        <h3 class="abs ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s"
-                            swiper-animate-delay="0.2s">警务大数据服务及解决方案专家</h3>
-                        <p class="abs clearfix itemspan"><span class="icon1 ani" swiper-animate-effect="fadeInLeft"
-                                                               swiper-animate-duration="0.5s"
-                                                               swiper-animate-delay="0.4s"> <i class="counter"
-                                                                                               data-lem-counter="{&quot;value_from&quot;: 10, &quot;value_to&quot;: 80, &quot;animate_duration&quot;: 3, &quot;locale&quot;: &quot;en-US&quot;}">80</i><label>公安客户</label> </span>
-                            <span class="icon2 ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s"
-                                  swiper-animate-delay="0.4s"> <i class="counter"
-                                                                  data-lem-counter="{&quot;value_from&quot;: 12000, &quot;value_to&quot;: 43251, &quot;animate_duration&quot;: 3, &quot;locale&quot;: &quot;en-US&quot;}">43,251</i><label>用户</label> </span>
-                            <span class="icon3 ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="0.5"
-                                  swiper-animate-delay="0.4s"> <i class="counter"
-                                                                  data-lem-counter="{&quot;value_from&quot;: 5983123402356, &quot;value_to&quot;: 793200000000, &quot;animate_duration&quot;: 3, &quot;locale&quot;: &quot;en-US&quot;}">793,200,000,000</i><label>数据条数</label> </span>
-                        </p>
-                    </div>
-                    <div class="swiper-slide slide2">
-                        <h1 class="abs">BDP</h1>
-                        <h3 class="abs ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s"
-                            swiper-animate-delay="0.2s">大数据赋能 让警务更智能</h3>
-                        <p class="abs clearfix itemspan"><i class="ani" swiper-animate-effect="fadeInUp"
-                                                            swiper-animate-duration="0.5s"
-                                                            swiper-animate-delay="0.4s"><em class="em1">Big Date</em><em
-                                class="point"> ● </em><em class="em2">Deep Insights</em></i> <span class="ani"
-                                                                                                   swiper-animate-effect="fadeInLeft"
-                                                                                                   swiper-animate-duration="0.5s"
-                                                                                                   swiper-animate-delay="0.4s"> <label><em
-                                class="em1">海 量 数 据 </em><em class="point">●</em> <em class="em2"> 分 析 极 致</em></label> </span>
-                        </p>
-                    </div>
-                    <div class="swiper-slide slide3">
-                        <h1 class="abs">BDP</h1>
-                        <h2 class="ani abs" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s"
-                            swiper-animate-delay="0.3s"> 海致警务大数据</h2>
-                        <h3 class="abs ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s"
-                            swiper-animate-delay="0.2s">可视化分析平台<p>免费</p>上线
-                        </h3>
-                        <p class="abs clearfix itemspan"><i class="ani" swiper-animate-effect="fadeInUp"
-                                                            swiper-animate-duration="0.5s" swiper-animate-delay="0.4s">1分钟搞定可视化分析</i>
-                            <span class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="0.5s"
-                                  swiper-animate-delay="0.4s"> <img
-                                    src="http://www.haizhi.com//public/images/banner3-ewm1.png"/> <label>扫描二维码关注“海致警务大数据”<br/>获取授权申请信息</label> </span>
-                        </p>
-                    </div>
-                </div>
-                <div class="bprev"></div>
-                <div class="bnext"></div>
-                <div class="pagination"></div>
-            </div>
-            <script type="text/javascript">
-                $('.counter').lemCounter();
-            </script>
-            <!-- banner 轮播 E -->
-        </div>
-        <img src="http://www.haizhi.com//public/images/mouse.png" class="banner_sj"/>
-        <div class="page_scollor">
-            滚动
-        </div>
-    </div>
-    <div class="page page2">
-        <div class="contain">
-            <!-- titl S -->
-            <div class="w_title_com">
-                <h1>Core product<i></i></h1>
-                <h2>产品特色<i></i></h2>
-            </div>
-            <!-- titl E
-       feature S -->
-            <div class="wrap feature abs">
-                <div class="feature_left">
-                    <img src="http://www.haizhi.com//public/images/feature.png"/>
-                </div>
-                <div class="feature_right">
-                    <h1>领先的警务解决方案</h1>
-                    <p>海致以专业化服务全警为目标，整合海量多源异构数据，基于核心的大数据技术积累与知识图谱的沉淀，实现公安内外部信息资源的汇聚整合、深度挖掘及各业务系统整体联动。</p>
-                    <!--<ul class="feature_item">
-                     <li class="f_item1"><i><u></u></i><span>数据聚合</span></li>
-             <li class="f_item2 "><i><u></u></i><span>可视化分享</span></li>
-             </ul>
-
-             <a href="javascript:void(0)" class="detail">详细信息<i></i></a>-->
-                </div>
-            </div>
-            <!-- feature E -->
-        </div>
-    </div>
-    <div class="page page3">
-        <div class="contain">
-            <!-- titl S -->
-            <div class="w_title_com">
-                <h1>Core product<i></i></h1>
-                <h2>产品特色<i></i></h2>
-            </div>
-            <div class="wrap feature abs">
-                <div class="feature_left">
-                    <img src="http://www.haizhi.com//public/images/page3_right.png"/>
-                </div>
-                <div class="feature_right">
-                    <h1>一站式数据管理和分析平台</h1>
-                    <p>从数据接入整合，到数据处理、分析、挖掘，再到多终端可视化，对数据进行全价值链管理。</p>
-                    <!--<ul class="feature_item">
-                     <li class="f_item1"><i><u></u></i><span>数据聚合</span></li>
-             <li class="f_item2 "><i><u></u></i><span>可视化分享</span></li>
-             </ul>
-
-             <a href="javascript:void(0)" class="detail">详细信息<i></i></a>-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="page page4">
-        <div class="contain">
-            <div class="particles"></div>
-            <!-- titl S -->
-            <div class="w_title_com">
-                <h1>Core product<i></i></h1>
-                <h2>产品特色<i></i></h2>
-            </div>
-            <div class="wrap feature abs">
-                <div class="feature_left">
-                    <img src="http://www.haizhi.com//public/images/page4_right.png"/>
-                </div>
-                <div class="feature_right">
-                    <h1>灵活易用的可视化分析</h1>
-                    <p>无需任何预处理，即可对数据做任意维度的多维分析，鼠标拖拽之间，轻松化数据为图像，在人与数据快速、流畅的交互中，加速智慧洞察。</p>
-                    <!--<ul class="feature_item">
-                     <li class="f_item1"><i><u></u></i><span>数据聚合</span></li>
-             <li class="f_item2 "><i><u></u></i><span>可视化分享</span></li>
-             </ul>
-
-             <a href="javascript:void(0)" class="detail">详细信息<i></i></a>-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="page page5">
-        <div class="contain">
-            <!-- titl S -->
-            <div class="w_title_com">
-                <h1>Core product<i></i></h1>
-                <h2>产品特色<i></i></h2>
-            </div>
-            <div class="wrap feature abs">
-                <div class="feature_left">
-                    <img src="http://www.haizhi.com//public/images/page5_right.png"/>
-                </div>
-                <div class="feature_right">
-                    <h1>全方位的数据接入</h1>
-                    <p>从内部数据，到各种SaaS应用、互联网平台，再到需要监控的各类外部数据，上百种数据源，一键对接。</p>
-                    <!--<ul class="feature_item">
-                     <li class="f_item1"><i><u></u></i><span>数据聚合</span></li>
-             <li class="f_item2 "><i><u></u></i><span>可视化分享</span></li>
-             </ul>
-
-             <a href="javascript:void(0)" class="detail">详细信息<i></i></a>-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="page page6">
-        <div class="contain">
-            <!-- titl S -->
-            <div class="w_title_com">
-                <h1>Core product<i></i></h1>
-                <h2>产品特色<i></i></h2>
-            </div>
-            <div class="wrap feature abs">
-                <div class="feature_left">
-                    <img src="http://www.haizhi.com//public/images/page6_right.png"/>
-                </div>
-                <div class="feature_right">
-                    <h1><font>完善的服务体系</font></h1>
-                    <p>海致提供完善的售前支持和售后服务体系，7*24小时专属客服响应，保证您稳定、流畅地使用。</p>
-                    <!--<a href="javascript:void(0)" class="detail">免费试用<i></i></a>-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="page page7">
-        <div class="contain">
-            <div class="wrap">
-                <div class="detail_left">
-                    <p class="t1">进一步了解海致警务大数据</p>
-                    <p class="t2">请填写以下信息，我们将尽快安排专业顾问与您沟通</p>
-                    <div class="d_info">
-                        <p><i class="tel"></i><label>400-063-9966</label></p>
-                        <p><i class="address"></i><label>北京市海淀区学院路甲5号768创意产业园</label></p>
-                        <p><label>上海市静安区武宁南路1号越商大厦2103室</label></p>
-                        <p><label>湖北省武汉市江汉区菱角湖万达广场A2座1508室</label></p>
-                    </div>
-                    <div class="er">
-                        <img src="http://www.haizhi.com//public/images/er.jpg" alt="关注"/>
-                        <span>海致警务大数据</span>
-                    </div>
-                    <div class="d_des">
-                        <p>BDP民警个人版公安内网登录地址：10.73.92.174</p>
-                        <p>获取更多产品资讯，请联系客服（微信号：policeBDP）</p>
-                    </div>
-                </div>
-                <form id="form" name="form" class="form_right">
-                    <div class="form">
-                        <p><input type="text" class="inputtxt" name="hz_uname" id="hz_uname" placeholder="姓名："
-                                  autocomplete="off"/><i>*</i></p>
-                        <p><input type="text" class="inputtxt" name="hz_tel" id="hz_tel" placeholder="手机："
-                                  autocomplete="off"/><i>*</i></p>
-                        <p><input type="text" class="inputtxt" name="hz_dw" id="hz_dw" placeholder="单位："
-                                  autocomplete="off"/><i>*</i></p>
-                        <p><input type="text" class="inputtxt" name="hz_email" id="hz_email" placeholder="邮箱："
-                                  autocomplete="off"/><i>*</i></p>
-                        <p><textarea class="inputtxt" name="hz_xq" id="hz_xq" placeholder="您想解决什么问题："
-                                     autocomplete="off"></textarea><i>*</i></p>
-                        <a href="javascript:void(0);" id="btnok" class="detail">提交，获取资料</a>
-                    </div>
-                </form>
-            </div>
-            <div class="footer">
-                <div class="link-item">
-                    <a href="http://www.haizhi.com/" target="_self">网站首页</a>
-                    <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=6"
-                       target="_self">客户服务</a>
-                    <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=10"
-                       target="_self">核心产品</a>
-                    <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=17"
-                       target="_self">关于我们</a>
-                    <a href="http://www.haizhi.com/index.php?m=content&amp;c=index&amp;a=lists&amp;catid=20"
-                       target="_self" class="nobor">加入我们</a>
-                </div>
-                <div class="power">
-                    北京海致网聚 Copyright &copy; 2013-2018 Haizhi Ltd. 京ICP备14006821号 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="http://www.lanshanweb.com" target="_blank">技术支持：蓝杉互动</a>
-                </div>
-            </div>
-            <script>
-                $(function () {
-                    $("#btnok").click(function () {
-                        var hz_uname = $("#hz_uname").val();
-                        if (hz_uname == "") {
-                            layer.tips('请填写姓名', '#hz_uname', {tips: [1, '#005fd3']});
-                            $("#hz_uname").focus();
-                            return false;
-                        }
-
-                        var reg2 = /^1[3,4,5,8]\d{9}$/;
-                        var hz_tel = $("#hz_tel").val();
-                        if (!reg2.test(hz_tel)) {
-                            layer.tips('电话格式不正确', '#hz_tel', {tips: [1, '#005fd3']});
-                            $("#hz_tel").focus();
-                            return false;
-                        }
-                        var hz_dw = $("#hz_dw").val();
-                        if (hz_dw == "") {
-                            layer.tips('请填写您的单位', '#hz_dw', {tips: [1, '#005fd3']});
-                            $("#hz_dw").focus();
-                            return false;
-                        }
-                        var hz_email = $("#hz_email").val();
-                        if (hz_email == "") {
-                            layer.tips('请填写您的邮箱', '#hz_email', {tips: [1, '#005fd3']});
-                            $("#hz_email").focus();
-                            return false;
-                        }
-                        var hz_xq = $("#hz_xq").val();
-                        if (hz_xq == "") {
-                            layer.tips('请填写您的需求', '#hz_xq', {tips: [1, '#005fd3']});
-                            $("#hz_xq").focus();
-                            return false;
-                        }
-
-                        $.ajax({
-                            'url': '?m=formguide&c=index&a=public_doajax',
-                            type: "POST",
-                            data: {
-                                'hz_uname': hz_uname,
-                                'hz_tel': hz_tel,
-                                'hz_dw': hz_dw,
-                                'hz_email': hz_email,
-                                'hz_xq': hz_xq,
-                                'dosubmit': '1'
-                            },
-                            dataType: "json",
-                            success: function (datasear) {
-                                layer.msg('请稍候。。');
-                                if (datasear.flag != false) {
-                                    $('#hz_uname,#hz_tel,#hz_dw,#hz_email,#hz_xq').val('');
-                                    layer.msg(datasear.msg);
-
-                                } else {
-                                    layer.msg('提交失败');
-                                }
-                            },
-                            beforeSend: function () {
-                                layer.msg('请稍候。。');
-                            },
-                            error: function () {
-                                layer.msg('抱歉，出错啦！');
-                            }
-
-                        })
-
-                    })
-
-                })
-
-            </script>
-        </div>
-    </div>
-</div>
-<ul id="navBar">
-    <li><i>首页</i></li>
-    <li><i>
-        <!--产品特色--></i></li>
-    <li><i>
-        <!--产品特色--></i></li>
-    <li><i>
-        <!--产品特色--></i></li>
-    <li><i>
-        <!--产品特色--></i></li>
-    <li><i>
-        <!--产品特色--></i></li>
-    <li><i>
-        <!--产品特色--></i></li>
-</ul>
-<script type="text/javascript" src="http://www.haizhi.com//public/js/index.js"></script>
 </body>
+<script type="text/javascript">
+    var fileBtn = $("input[name=file]");
+    var processBar= $("#progressBar");
+    var uploadBtn=$("input[name=upload]");
+    var canelBtn=$("input[name=cancelUpload]");
+    var ot;//上传开始时间
+    var oloaded;//已上传文件大小
+    fileBtn.change(function() {
+        var fileObj = fileBtn.get(0).files[0]; //js获取文件对象
+        if (fileObj) {
+            var fileSize = getSize(fileObj.size);
+            $("label[name=upfileName]").text('文件名：' + fileObj.name);
+            $("label[name=upfileSize]").text('文件大小：' + fileSize);
+            $("label[name=upfileType]").text('文件类型：' + fileObj.type);
+            uploadBtn.attr('disabled', false);
+        }
+    });
+    // 上传文件按钮点击的时候
+    uploadBtn.click(function(){
+        // 进度条归零
+        setProgress(0);
+        // 上传按钮禁用
+        $(this).attr('disabled', true);
+        // 进度条显示
+        showProgress();
+        // 上传文件
+        uploadFile();
+    });
+    function uploadFile(){
+        var url ="/my_upload";
+        var fileObj = fileBtn.get(0).files[0];
+        if(fileObj==null){
+            alert("请选择文件");
+            return;
+        }
+        // FormData 对象
+        var form = new FormData();
+        form.append('file', fileObj);
+        form.append('fileName',fileObj.name)// 文件对象
+        // XMLHttpRequest 对象
+        var xhr = new XMLHttpRequest();
+        //true为异步处理
+        xhr.open('post', url, true);
+        //上传开始执行方法
+        xhr.onloadstart = function() {
+            console.log('开始上传')
+            ot = new Date().getTime();   //设置上传开始时间
+            oloaded = 0;//已上传的文件大小为0
+        };
+
+        xhr.upload.addEventListener('progress', progressFunction, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.addEventListener("error", uploadFailed, false);
+        xhr.addEventListener("abort", uploadCanceled, false);
+        xhr.send(form);
+
+        function progressFunction(evt) {
+            debugger;
+            if (evt.lengthComputable) {
+                var completePercent = Math.round(evt.loaded / evt.total * 100)
+                    + '%';
+                processBar.width(completePercent);
+                processBar.text(completePercent);
+
+                var time = $("#time");
+                var nt = new Date().getTime();     //获取当前时间
+                var pertime = (nt-ot)/1000;        //计算出上次调用该方法时到现在的时间差，单位为s
+                ot = new Date().getTime();          //重新赋值时间，用于下次计算
+
+                var perload = evt.loaded - oloaded; //计算该分段上传的文件大小，单位b
+                oloaded = evt.loaded;               //重新赋值已上传文件大小
+
+                //上传速度计算
+                var speed = perload/pertime;//单位b/s
+                var bspeed = speed;
+                var units = 'b/s';//单位名称
+                if(speed/1024>1){
+                    speed = speed/1024;
+                    units = 'k/s';
+                }
+                if(speed/1024>1){
+                    speed = speed/1024;
+                    units = 'M/s';
+                }
+                speed = speed.toFixed(1);
+                //剩余时间
+                var resttime = ((evt.total-evt.loaded)/bspeed).toFixed(1);
+                $("#showInfo").html(speed+units+'，剩余时间：'+resttime+'s');
+            }
+        }
+
+        //上传成功后回调
+        function uploadComplete(evt) {
+            uploadBtn.attr('disabled', false);
+            console.log('上传完成')
+        };
+
+        //上传失败回调
+        function uploadFailed(evt) {
+            console.log('上传失败' + evt.target.responseText);
+        }
+
+        //终止上传
+        function cancelUpload() {
+            xhr.abort();
+        }
+
+        //上传取消后回调
+        function uploadCanceled(evt) {
+            console.log('上传取消,上传被用户取消或者浏览器断开连接:' + evt.target.responseText);
+        }
+
+        canelBtn.click(function(){
+            uploadBtn.attr('disabled', false);
+            cancelUpload();
+        })
+    }
+    function getSize(size) {
+        var fileSize = '0KB';
+        if (size > 1024 * 1024) {
+            fileSize = (Math.round(size / (1024 * 1024))).toString() + 'MB';
+        } else {
+            fileSize = (Math.round(size / 1024)).toString() + 'KB';
+        }
+        return fileSize;
+    }
+    function setProgress(w) {
+        processBar.width(w + '%');
+    }
+    function showProgress() {
+        processBar.parent().show();
+    }
+    function hideProgress() {
+        processBar.parent().hide();
+    }
+</script>
 </html>

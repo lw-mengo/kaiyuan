@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -127,5 +126,33 @@ public class TestController {
         }
         return "upload not success";
 
+    }
+
+    @GetMapping("/custom_upload")
+    public String custom_upload() {
+        return "temp";
+    }
+
+    @PostMapping("/my_upload")
+    public String uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("fileName") String fileName) {
+        if (file == null || file.isEmpty()) {
+            return "file is empty";
+        }
+        //获取文件名
+        //String fileName = file.getOriginalFilename();
+        //文件存储路径
+        String filePath = "F:\\upload\\" + fileName;
+        System.out.println(fileName);
+        System.out.println(filePath);
+        File dest = new File(filePath);
+        if (!dest.getParentFile().exists()) {
+            dest.getParentFile().mkdirs();
+        }
+        try {
+            file.transferTo(dest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "fail";
     }
 }
