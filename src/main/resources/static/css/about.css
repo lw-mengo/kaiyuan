@@ -355,7 +355,7 @@ footer a, footer a:hover, footer p {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    padding: 70px 220px;
+    padding: 50px 220px;
     margin: auto
 }
 
@@ -390,7 +390,7 @@ footer a, footer a:hover, footer p {
 }
 
 .main .mainContent .container-btm .container-det .contact-us {
-    padding-top: 56px
+    padding-top: 30px
 }
 
 .main .mainContent .container-btm .container-det .contact-us .left {
@@ -404,7 +404,7 @@ footer a, footer a:hover, footer p {
 }
 
 .main .mainContent .container-btm .container-det .contact-us .left .title {
-    margin: 0 0 23px;
+    margin: 0 0 35px;
     text-align: left;
     line-height: 30px;
     font-size: 32px
@@ -450,11 +450,15 @@ footer a, footer a:hover, footer p {
 }
 
 .main .mainContent .container-btm .container-det .contact-us .right img {
-    width: 128px;
-    height: 128px;
+    width: 90px;
+    height: 90px;
     margin-top: 12px
 }
-
+.main .mainContent .container-btm .container-det .contact-us .right .img2 {
+    width: 235px;
+    height: 139px;
+    margin-top: 12px
+}
 .main .mainContent .container-btm .container-det .company-map {
     margin: 30px auto
 }
