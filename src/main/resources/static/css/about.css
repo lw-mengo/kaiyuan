@@ -404,7 +404,7 @@ footer a, footer a:hover, footer p {
 }
 
 .main .mainContent .container-btm .container-det .contact-us .left .title {
-    margin: 0 0 35px;
+    margin: 0 0 20px;
     text-align: left;
     line-height: 30px;
     font-size: 32px
@@ -415,7 +415,7 @@ footer a, footer a:hover, footer p {
     color: #fff;
     opacity: .7;
     margin: 18px 0;
-    line-height: 30px
+    line-height: 17px
 }
 
 .main .mainContent .container-btm .container-det .contact-us .left .detail > li i {
@@ -450,15 +450,11 @@ footer a, footer a:hover, footer p {
 }
 
 .main .mainContent .container-btm .container-det .contact-us .right img {
-    width: 90px;
-    height: 90px;
+    width: 130px;
+    height: 130px;
     margin-top: 12px
 }
-.main .mainContent .container-btm .container-det .contact-us .right .img2 {
-    width: 235px;
-    height: 139px;
-    margin-top: 12px
-}
+
 .main .mainContent .container-btm .container-det .company-map {
     margin: 30px auto
 }
