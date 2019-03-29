@@ -3,11 +3,13 @@ package com.kaiyuan.mengo.kaiyuan.controllers;
 import com.opencsv.CSVReader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.FileReader;
@@ -63,8 +65,14 @@ public class TestController {
     }
 
     @GetMapping("customization")
-    public String customization(Model model) {
-        String filePath = "F:\\upload\\iris.csv";//读取文件
+    public String customization() {
+
+        return "customization";
+    }
+
+    @GetMapping("preview")
+    public String preview(@RequestParam("fileName") String fileName, Model model) {
+        String filePath = "/home/front_dev/upload/" + fileName;//读取文件
         String[] titles;
         try {
             //使用opencsv
@@ -74,8 +82,6 @@ public class TestController {
             if (nextLine != null) {
                 titles = nextLine;
                 model.addAttribute("title", titles);
-            } else {
-                return "fail";
             }
             for (int i = 0; i < 15; i++) {
                 String[] next = reader.readNext();
@@ -86,12 +92,11 @@ public class TestController {
             int length = list.size();
             System.out.println(length);
             model.addAttribute("dataList", list);
-
-
+            return "customization::table_refresh";
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "customization";
+        return "fail";
     }
 
     @GetMapping("customization_browse")
@@ -134,14 +139,14 @@ public class TestController {
     }
 
     @PostMapping("/my_upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("fileName") String fileName) {
+    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("fileName") String fileName) {
         if (file == null || file.isEmpty()) {
             return "file is empty";
         }
         //获取文件名
         //String fileName = file.getOriginalFilename();
         //文件存储路径
-        String filePath = "F:\\upload\\" + fileName;
+        String filePath = "/home/front_dev/upload/" + fileName;
         System.out.println(fileName);
         System.out.println(filePath);
         File dest = new File(filePath);

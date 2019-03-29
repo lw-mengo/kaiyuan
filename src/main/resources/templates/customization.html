@@ -64,7 +64,9 @@
             <div class="row placeholder">
                 <span id="time"></span>
                 <div class="container">
-                    <input class="btn btn-info btn-xs" type="file" name="file" onchange="checkFileType(this.value);" data-toggle="tooltip" title="暂只支持csv格式"/><br />
+                    <span id="uploadSpan">
+                    <input class="btn btn-info btn-xs" type="file" name="file" onchange="checkFileType(this.value);"
+                           data-toggle="tooltip" title="暂只支持csv格式"/><br/></span>
                     <div class="col-lg-5"
                          style="padding-left: 0; padding-right: 0; margin-bottom: 0px;">
                         <div class="progress progress-striped active" style="display: ">
@@ -78,45 +80,57 @@
                 </div>
                 <!-- 显示文件信息 -->
                 <div id="showFieInfo" class="container">
-                    <label name="upfileName"></label><br />
-                    <label name="upfileSize"></label><br />
-                    <label name="upfileType"></label><br />
+                    <label name="upfileName"></label><br/>
+                    <label name="upfileSize"></label><br/>
+                    <label name="upfileType"></label><br/>
                 </div>
                 <div class="container">
-                    <input class="btn btn-success btn-xs" type="button" name="upload" value="上传" />
-                    <input class="btn btn-success btn-xs" type="button" name="cancelUpload" value="取消" />
+                    <input class="btn btn-success btn-xs" type="button" name="upload" value="上传"/>
+                    <input class="btn btn-success btn-xs" type="button" name="cancelUpload" value="取消"/>
                 </div>
-                <div class="container">
-                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">数据预览</button>
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th th:each="titles:${title}">
-                                <p th:text="${titles}" style="text-align: center"></p>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="data:${dataList}">
-                            <td th:each="d:${data}">
-                                <p th:text="${d}"></p>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <br/>
+                <br/>
+                <!--数据预览-->
+                <div class="container" id="preview">
+                    <bu1tton class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onClick="localRefresh()">数据预览</bu1tton>
                 </div>
 
                 <!--模态框-->
-                <div  class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                                </button>
                                 <h4 class="modal-title" id="myModalLabel">仅显示15条数据</h4>
+                            </div>
+                            <div class="modal-body" id="table_refresh" th:fragment="table_refresh">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th th:each="titles:${title}">
+                                            <p th:text="${titles}" style="text-align: center"></p>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="data:${dataList}">
+                                        <td th:each="d:${data}">
+                                            <p th:text="${d}"></p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <br/>
+                <br/>
                 <div class="container">
                     <h2>导入规则</h2>
                     <form>
@@ -134,6 +148,7 @@
 <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
+        $("#preview").hide();
     });
 
     function checkFileType(str) {
@@ -145,15 +160,22 @@
             resetFile();
         }
     }
+    var html= document.getElementById("uploadSpan").innerHTML;
+    function resetFile() {
+        document.getElementById("uploadSpan").innerHTML=html;
+    }
 
 
     var fileBtn = $("input[name=file]");
-    var processBar= $("#progressBar");
-    var uploadBtn=$("input[name=upload]");
-    var canelBtn=$("input[name=cancelUpload]");
+    var processBar = $("#progressBar");
+    var uploadBtn = $("input[name=upload]");
+    var canelBtn = $("input[name=cancelUpload]");
     var ot;//上传开始时间
     var oloaded;//已上传文件大小
-    fileBtn.change(function() {
+
+
+
+    fileBtn.change(function () {
         var fileObj = fileBtn.get(0).files[0]; //js获取文件对象
         if (fileObj) {
             var fileSize = getSize(fileObj.size);
@@ -163,8 +185,16 @@
             uploadBtn.attr('disabled', false);
         }
     });
+
+    function localRefresh() {
+        var fileObj = fileBtn.get(0).files[0]; //js获取文件对象
+        var  fileName = fileObj.name;
+        console.log(fileName);
+        $("#table_refresh").load("/preview?fileName="+fileName);
+    }
+
     // 上传文件按钮点击的时候
-    uploadBtn.click(function(){
+    uploadBtn.click(function () {
         // 进度条归零
         setProgress(0);
         // 上传按钮禁用
@@ -174,23 +204,24 @@
         // 上传文件
         uploadFile();
     });
-    function uploadFile(){
-        var url ="/my_upload";
+
+    function uploadFile() {
+        var url = "/my_upload";
         var fileObj = fileBtn.get(0).files[0];
-        if(fileObj==null){
+        if (fileObj == null) {
             alert("请选择文件");
             return;
         }
         // FormData 对象
         var form = new FormData();
         form.append('file', fileObj);
-        form.append('fileName',fileObj.name)// 文件对象
+        form.append('fileName', fileObj.name)// 文件对象
         // XMLHttpRequest 对象
         var xhr = new XMLHttpRequest();
         //true为异步处理
         xhr.open('post', url, true);
         //上传开始执行方法
-        xhr.onloadstart = function() {
+        xhr.onloadstart = function () {
             console.log('开始上传')
             ot = new Date().getTime();   //设置上传开始时间
             oloaded = 0;//已上传的文件大小为0
@@ -212,37 +243,40 @@
 
                 var time = $("#time");
                 var nt = new Date().getTime();     //获取当前时间
-                var pertime = (nt-ot)/1000;        //计算出上次调用该方法时到现在的时间差，单位为s
+                var pertime = (nt - ot) / 1000;        //计算出上次调用该方法时到现在的时间差，单位为s
                 ot = new Date().getTime();          //重新赋值时间，用于下次计算
 
                 var perload = evt.loaded - oloaded; //计算该分段上传的文件大小，单位b
                 oloaded = evt.loaded;               //重新赋值已上传文件大小
 
                 //上传速度计算
-                var speed = perload/pertime;//单位b/s
+                var speed = perload / pertime;//单位b/s
                 var bspeed = speed;
                 var units = 'b/s';//单位名称
-                if(speed/1024>1){
-                    speed = speed/1024;
+                if (speed / 1024 > 1) {
+                    speed = speed / 1024;
                     units = 'k/s';
                 }
-                if(speed/1024>1){
-                    speed = speed/1024;
+                if (speed / 1024 > 1) {
+                    speed = speed / 1024;
                     units = 'M/s';
                 }
                 speed = speed.toFixed(1);
                 //剩余时间
-                var resttime = ((evt.total-evt.loaded)/bspeed).toFixed(1);
-                $("#showInfo").html(speed+units+'，剩余时间：'+resttime+'s');
+                var resttime = ((evt.total - evt.loaded) / bspeed).toFixed(1);
+                $("#showInfo").html(speed + units + '，剩余时间：' + resttime + 's');
             }
         }
+
+        var optionJson = [];
 
         //上传成功后回调
         function uploadComplete(evt) {
             uploadBtn.attr('disabled', false);
             $("#showInfo").html("上传完成");
-            console.log('上传完成')
-        };
+            $("#preview").show();
+            console.log(fileObj.name);
+        }
 
         //上传失败回调
         function uploadFailed(evt) {
@@ -261,11 +295,12 @@
             console.log('上传取消,上传被用户取消或者浏览器断开连接:' + evt.target.responseText);
         }
 
-        canelBtn.click(function(){
+        canelBtn.click(function () {
             uploadBtn.attr('disabled', false);
             cancelUpload();
         })
     }
+
     function getSize(size) {
         var fileSize = '0KB';
         if (size > 1024 * 1024) {
@@ -275,16 +310,14 @@
         }
         return fileSize;
     }
+
     function setProgress(w) {
         processBar.width(w + '%');
     }
+
     function showProgress() {
         processBar.parent().show();
     }
-
-
-
-
 
 </script>
 </body>
