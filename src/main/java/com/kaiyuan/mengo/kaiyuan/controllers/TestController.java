@@ -72,7 +72,7 @@ public class TestController {
 
     @GetMapping("preview")
     public String preview(@RequestParam("fileName") String fileName, Model model) {
-        String filePath = "/home/front_dev/upload/" + fileName;//读取文件
+        String filePath = "F:\\upload\\" + fileName;//读取文件
         String[] titles;
         try {
             //使用opencsv
@@ -92,7 +92,7 @@ public class TestController {
             int length = list.size();
             System.out.println(length);
             model.addAttribute("dataList", list);
-            return "customization::table_refresh";
+            return "preview";
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -139,25 +139,30 @@ public class TestController {
     }
 
     @PostMapping("/my_upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("fileName") String fileName) {
-        if (file == null || file.isEmpty()) {
+    public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName) {
+        if (files == null || files.length==0) {
             return "file is empty";
         }
         //获取文件名
         //String fileName = file.getOriginalFilename();
         //文件存储路径
-        String filePath = "/home/front_dev/upload/" + fileName;
-        System.out.println(fileName);
-        System.out.println(filePath);
-        File dest = new File(filePath);
-        if (!dest.getParentFile().exists()) {
-            dest.getParentFile().mkdirs();
+        for (int i = 0; i < files.length; i++) {
+            String filePath = "F:\\upload\\" + fileName[i];
+            System.out.println(fileName[i]);
+            System.out.println(filePath);
+            File dest = new File(filePath);
+            MultipartFile file = files[i];
+            if (!dest.getParentFile().exists()) {
+                dest.getParentFile().mkdirs();
+            }
+            try {
+                file.transferTo(dest);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            file.transferTo(dest);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+
         return "fail";
     }
 }

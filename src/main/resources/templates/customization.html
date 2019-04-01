@@ -65,7 +65,7 @@
                 <span id="time"></span>
                 <div class="container">
                     <span id="uploadSpan">
-                    <input class="btn btn-info btn-xs" type="file" name="file" onchange="checkFileType(this.value);"
+                    <input class="btn btn-info btn-xs" type="file" name="file" multiple="multiple"
                            data-toggle="tooltip" title="暂只支持csv格式"/><br/></span>
                     <div class="col-lg-5"
                          style="padding-left: 0; padding-right: 0; margin-bottom: 0px;">
@@ -89,6 +89,12 @@
                     <input class="btn btn-success btn-xs" type="button" name="cancelUpload" value="取消"/>
                 </div>
                 <br/>
+                <br/>
+                <!--数据预览第二版-->
+                <div class="container" id="myButton">
+                    <button class="btn btn-primary btn-lg" onclick="myButton()">数据预览</button>
+                    <br/>
+                </div>
                 <br/>
                 <!--数据预览-->
                 <div class="container" id="preview">
@@ -173,17 +179,44 @@
     var ot;//上传开始时间
     var oloaded;//已上传文件大小
 
-
+    //点击数据预览按钮后出现对应文件的预览链接
+    function myButton(){
+        for (var i=0;i<fileBtn.get(0).files.length;i++){
+            var fileObj = fileBtn.get(0).files[i];
+            var fileName = fileObj.name;
+            var path = "/preview?fileName="+fileName;
+            $("#myButton").append("<a href='"+path+"' target='_blank'><h3>"+fileName+"</h3></a><br/>");
+        }
+    }
 
     fileBtn.change(function () {
-        var fileObj = fileBtn.get(0).files[0]; //js获取文件对象
-        if (fileObj) {
-            var fileSize = getSize(fileObj.size);
-            $("label[name=upfileName]").text('文件名：' + fileObj.name);
-            $("label[name=upfileSize]").text('文件大小：' + fileSize);
-            $("label[name=upfileType]").text('文件类型：' + fileObj.type);
-            uploadBtn.attr('disabled', false);
+        var fileName = "文件名:";
+        var fileSizeLabel = "文件大小：";
+        var length = fileBtn.get(0).files.length;
+        console.log(length);
+        for (var i=0;i<length;i++){
+            var fileObj = fileBtn.get(0).files[i]; //js获取文件对象
+            var pos = fileObj.name.lastIndexOf(".");
+            var lastname = fileObj.name.substring(pos, fileObj.name.length);
+            var resultName = lastname.toLowerCase();
+            if ('.csv' != resultName.toString()) {
+                alert('只能上传csv文件，您上传的文件类型为' + lastname + '，请重新上传');
+                resetFile();
+                location.reload();
+                return;
+            }
+            if (fileObj) {
+                var fileSize = getSize(fileObj.size);
+                fileName+=fileObj.name+";";
+                fileSizeLabel +=fileSize+";";
+                console.log(fileName);
+                $("label[name=upfileType]").text('文件类型：' + fileObj.type);
+                uploadBtn.attr('disabled', false);
+            }
         }
+        $("label[name=upfileName]").text(fileName);
+        $("label[name=upfileSize]").text(fileSizeLabel);
+
     });
 
     function localRefresh() {
@@ -214,8 +247,11 @@
         }
         // FormData 对象
         var form = new FormData();
-        form.append('file', fileObj);
-        form.append('fileName', fileObj.name)// 文件对象
+        for (var i=0;i<fileBtn.get(0).files.length;i++){
+            form.append('files', fileBtn.get(0).files[i]);
+            form.append('fileName', fileBtn.get(0).files[i].name)// 文件对象
+        }
+
         // XMLHttpRequest 对象
         var xhr = new XMLHttpRequest();
         //true为异步处理
