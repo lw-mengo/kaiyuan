@@ -96,13 +96,15 @@
                     <br/>
                 </div>
                 <br/>
-                <!--数据预览-->
-                <div class="container" id="preview">
+                <!--数据预览弃用-->
+               <!--
+               <div class="container" id="preview">
                     <bu1tton class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onClick="localRefresh()">数据预览</bu1tton>
                 </div>
+                -->
 
                 <!--模态框-->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+               <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -134,7 +136,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <br/>
                 <br/>
                 <div class="container">
@@ -154,7 +156,7 @@
 <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
-        $("#preview").hide();
+        $("#myButton").hide();
     });
 
     function checkFileType(str) {
@@ -166,6 +168,8 @@
             resetFile();
         }
     }
+
+    //初始化文件选择框
     var html= document.getElementById("uploadSpan").innerHTML;
     function resetFile() {
         document.getElementById("uploadSpan").innerHTML=html;
@@ -310,7 +314,7 @@
         function uploadComplete(evt) {
             uploadBtn.attr('disabled', false);
             $("#showInfo").html("上传完成");
-            $("#preview").show();
+            $("#myButton").show();
             console.log(fileObj.name);
         }
 

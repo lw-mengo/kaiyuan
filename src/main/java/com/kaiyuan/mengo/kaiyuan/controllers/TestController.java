@@ -72,13 +72,14 @@ public class TestController {
 
     @GetMapping("preview")
     public String preview(@RequestParam("fileName") String fileName, Model model) {
-        String filePath = "F:\\upload\\" + fileName;//读取文件
+        String filePath = "/home/front_dev/upload/" + fileName;//读取文件
         String[] titles;
+        model.addAttribute("fileName",fileName);
         try {
             //使用opencsv
             CSVReader reader = new CSVReader(new FileReader(filePath));
             String[] nextLine = reader.readNext();
-            List<String[]> list = new ArrayList<>();
+            List<String[]> list = new ArrayList<>();//一定要初始化
             if (nextLine != null) {
                 titles = nextLine;
                 model.addAttribute("title", titles);
@@ -121,7 +122,7 @@ public class TestController {
             return "fail";
         }
         String fileName = file.getOriginalFilename();
-        String filePath = "F:\\upload\\";   //"/home/front_dev/upload/"
+        String filePath = "/home/front_dev/upload/";   //"/home/front_dev/upload/"
         File dest = new File(filePath + fileName);
         try {
             file.transferTo(dest);
@@ -141,13 +142,13 @@ public class TestController {
     @PostMapping("/my_upload")
     public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName) {
         if (files == null || files.length==0) {
-            return "file is empty";
+            return "fail";
         }
         //获取文件名
         //String fileName = file.getOriginalFilename();
         //文件存储路径
         for (int i = 0; i < files.length; i++) {
-            String filePath = "F:\\upload\\" + fileName[i];
+            String filePath = "/home/front_dev/upload/" + fileName[i];//"F:\\upload\\"
             System.out.println(fileName[i]);
             System.out.println(filePath);
             File dest = new File(filePath);
@@ -161,8 +162,6 @@ public class TestController {
                 e.printStackTrace();
             }
         }
-
-
         return "fail";
     }
 }
