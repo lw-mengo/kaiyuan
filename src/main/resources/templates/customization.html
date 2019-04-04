@@ -66,7 +66,7 @@
                 <div class="container">
                     <span id="uploadSpan">
                     <input class="btn btn-info btn-xs" type="file" name="file" multiple="multiple"
-                           data-toggle="tooltip" title="暂只支持csv格式"/><br/></span>
+                           data-toggle="tooltip" title="暂只支持csv和json格式"/><br/></span>
                     <div class="col-lg-5"
                          style="padding-left: 0; padding-right: 0; margin-bottom: 0px;">
                         <div class="progress progress-striped active" style="display: ">
@@ -97,58 +97,69 @@
                 </div>
                 <br/>
                 <!--数据预览弃用-->
-               <!--
-               <div class="container" id="preview">
-                    <bu1tton class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onClick="localRefresh()">数据预览</bu1tton>
-                </div>
-                -->
+                <!--
+                <div class="container" id="preview">
+                     <bu1tton class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onClick="localRefresh()">数据预览</bu1tton>
+                 </div>
+                 -->
 
                 <!--模态框-->
-               <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">仅显示15条数据</h4>
-                            </div>
-                            <div class="modal-body" id="table_refresh" th:fragment="table_refresh">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th th:each="titles:${title}">
-                                            <p th:text="${titles}" style="text-align: center"></p>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="data:${dataList}">
-                                        <td th:each="d:${data}">
-                                            <p th:text="${d}"></p>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-                <br/>
-                <br/>
+                <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                      aria-hidden="true">
+                     <div class="modal-dialog">
+                         <div class="modal-content">
+                             <div class="modal-header">
+                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                                 </button>
+                                 <h4 class="modal-title" id="myModalLabel">仅显示15条数据</h4>
+                             </div>
+                             <div class="modal-body" id="table_refresh" th:fragment="table_refresh">
+                                 <table class="table table-bordered">
+                                     <thead>
+                                     <tr>
+                                         <th th:each="titles:${title}">
+                                             <p th:text="${titles}" style="text-align: center"></p>
+                                         </th>
+                                     </tr>
+                                     </thead>
+                                     <tbody>
+                                     <tr th:each="data:${dataList}">
+                                         <td th:each="d:${data}">
+                                             <p th:text="${d}"></p>
+                                         </td>
+                                     </tr>
+                                     </tbody>
+                                 </table>
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                             </div>
+                         </div>
+                     </div>
+                 </div>-->
                 <div class="container">
-                    <h2>导入规则</h2>
+                    <h4>导入规则</h4>
                     <form>
-                        <input type="text">
-                        <button type="submit">导入</button>
-                    </form>
-                </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked="checked">显示搜索时使用的字段
+                            </label>
+                            <label>
+                                <input type="checkbox" checked="checked">显示节点标题
+                            </label>
+                            <label>
+                                <input type="checkbox" checked="checked">显示节点度的属性名
+                            </label>
+                            <label>
+                                <input type="checkbox" checked="checked">显示节点图片的属性名
+                            </label>
+                        </div>
+                            <button class="btn btn-primary" type="submit">导入</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <script src="js/jquery-3.3.1.min.js"></script>
@@ -170,9 +181,10 @@
     }
 
     //初始化文件选择框
-    var html= document.getElementById("uploadSpan").innerHTML;
+    var html = document.getElementById("uploadSpan").innerHTML;
+
     function resetFile() {
-        document.getElementById("uploadSpan").innerHTML=html;
+        document.getElementById("uploadSpan").innerHTML = html;
     }
 
 
@@ -184,12 +196,12 @@
     var oloaded;//已上传文件大小
 
     //点击数据预览按钮后出现对应文件的预览链接
-    function myButton(){
-        for (var i=0;i<fileBtn.get(0).files.length;i++){
+    function myButton() {
+        for (var i = 0; i < fileBtn.get(0).files.length; i++) {
             var fileObj = fileBtn.get(0).files[i];
             var fileName = fileObj.name;
-            var path = "/preview?fileName="+fileName;
-            $("#myButton").append("<a href='"+path+"' target='_blank'><h3>"+fileName+"</h3></a><br/>");
+            var path = "/preview?fileName=" + fileName;
+            $("#myButton").append("<a href='" + path + "' target='_blank'><h3>" + fileName + "</h3></a><br/>");
         }
     }
 
@@ -198,21 +210,21 @@
         var fileSizeLabel = "文件大小：";
         var length = fileBtn.get(0).files.length;
         console.log(length);
-        for (var i=0;i<length;i++){
+        for (var i = 0; i < length; i++) {
             var fileObj = fileBtn.get(0).files[i]; //js获取文件对象
             var pos = fileObj.name.lastIndexOf(".");
             var lastname = fileObj.name.substring(pos, fileObj.name.length);
             var resultName = lastname.toLowerCase();
-            if ('.csv' != resultName.toString()) {
-                alert('只能上传csv文件，您上传的文件类型为' + lastname + '，请重新上传');
+            if ('.csv' != resultName.toString() && '.json' != resultName.toString()) {
+                alert('只能上传csv或json文件，您上传的文件类型为' + lastname + '，请重新上传');
                 resetFile();
                 location.reload();
                 return;
             }
             if (fileObj) {
                 var fileSize = getSize(fileObj.size);
-                fileName+=fileObj.name+";";
-                fileSizeLabel +=fileSize+";";
+                fileName += fileObj.name + ";";
+                fileSizeLabel += fileSize + ";";
                 console.log(fileName);
                 $("label[name=upfileType]").text('文件类型：' + fileObj.type);
                 uploadBtn.attr('disabled', false);
@@ -225,9 +237,9 @@
 
     function localRefresh() {
         var fileObj = fileBtn.get(0).files[0]; //js获取文件对象
-        var  fileName = fileObj.name;
+        var fileName = fileObj.name;
         console.log(fileName);
-        $("#table_refresh").load("/preview?fileName="+fileName);
+        $("#table_refresh").load("/preview?fileName=" + fileName);
     }
 
     // 上传文件按钮点击的时候
@@ -251,7 +263,7 @@
         }
         // FormData 对象
         var form = new FormData();
-        for (var i=0;i<fileBtn.get(0).files.length;i++){
+        for (var i = 0; i < fileBtn.get(0).files.length; i++) {
             form.append('files', fileBtn.get(0).files[i]);
             form.append('fileName', fileBtn.get(0).files[i].name)// 文件对象
         }

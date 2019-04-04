@@ -1,19 +1,17 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
+import com.kaiyuan.mengo.kaiyuan.utility.JsonFormat;
 import com.opencsv.CSVReader;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,30 +70,61 @@ public class TestController {
 
     @GetMapping("preview")
     public String preview(@RequestParam("fileName") String fileName, Model model) {
-        String filePath = "/home/front_dev/upload/" + fileName;//读取文件
-        String[] titles;
-        model.addAttribute("fileName",fileName);
-        try {
-            //使用opencsv
-            CSVReader reader = new CSVReader(new FileReader(filePath));
-            String[] nextLine = reader.readNext();
-            List<String[]> list = new ArrayList<>();//一定要初始化
-            if (nextLine != null) {
-                titles = nextLine;
-                model.addAttribute("title", titles);
-            }
-            for (int i = 0; i < 15; i++) {
-                String[] next = reader.readNext();
-                if (next != null) {
-                    list.add(next);
+        //根据文件名判断是什么类型
+        String[] strings = fileName.split("\\.");
+        String fileType = strings[1].toLowerCase();
+        //如果是csv文件就返回
+        if (fileType.equals("csv")) {
+            String filePath = "F:\\upload\\" + fileName;//读取文件
+            String[] titles;
+            model.addAttribute("fileName", fileName);
+            try {
+                //使用opencsv
+                CSVReader reader = new CSVReader(new FileReader(filePath));
+                String[] nextLine = reader.readNext();
+                List<String[]> list = new ArrayList<>();//一定要初始化
+                if (nextLine != null) {
+                    titles = nextLine;
+                    model.addAttribute("title", titles);
                 }
+                for (int i = 0; i < 15; i++) {
+                    String[] next = reader.readNext();
+                    if (next != null) {
+                        list.add(next);
+                    }
+                }
+                int length = list.size();
+                System.out.println(length);
+                model.addAttribute("dataList", list);
+                return "preview";
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            int length = list.size();
-            System.out.println(length);
-            model.addAttribute("dataList", list);
-            return "preview";
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            //否则就是json文件
+            String filePath = "F:\\upload\\" + fileName;//读取文件
+            String string = "";
+            try {
+                FileInputStream inputStream = new FileInputStream(filePath);
+                InputStreamReader reader = new InputStreamReader(inputStream,"utf-8");
+                BufferedReader br = new BufferedReader(reader);
+                String s = "";
+                while((s = br.readLine())!=null){
+                        string+=s;
+                }
+                br.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            JSONObject jsonObject = new JSONObject(string);
+            String userJson = JsonFormat.format(jsonObject.toString());
+            System.out.println(userJson);
+            model.addAttribute("userJson",userJson);
+            return "temp";
         }
         return "fail";
     }
@@ -141,14 +170,14 @@ public class TestController {
 
     @PostMapping("/my_upload")
     public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName) {
-        if (files == null || files.length==0) {
+        if (files == null || files.length == 0) {
             return "fail";
         }
         //获取文件名
         //String fileName = file.getOriginalFilename();
         //文件存储路径
         for (int i = 0; i < files.length; i++) {
-            String filePath = "/home/front_dev/upload/" + fileName[i];//"F:\\upload\\"
+            String filePath = "F:\\upload\\" + fileName[i];//"F:\\upload\\"
             System.out.println(fileName[i]);
             System.out.println(filePath);
             File dest = new File(filePath);
