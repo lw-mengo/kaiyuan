@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form id="my_form" method="post">
+<form id="my_form">
     <input type="text" name="name">用户名
     <input type="password" name="password">密码
 </form>
@@ -16,6 +16,7 @@
 <script src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
 <script>
     function btn() {
+        console.info($('#my_form').serializeArray())
         $.ajax({
             type: 'post',
             url: '/loginAction',

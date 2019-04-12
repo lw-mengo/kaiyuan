@@ -50,18 +50,20 @@
             <div class="mainContent">
                 <div class="loginBox">
                     <div class="loginForm" id="loginForm">
+
                         <div class="login-title">登录</div>
                         <label class="login-line">
                             <span class="login-label">用户名</span>
                             <input type="text" class="hu-input input-primary" placeholder="请输入用户名" id="_login-inputPhone">
-                            <span class="error-info"></span>
+                            <span id="yhm" style="display: none" class="error-info">用户名不能为空</span>
                         </label>
                         <label class="login-line">
                             <span class="login-label">密码</span>
                             <input type="password" class="hu-input input-primary" placeholder="请输入密码" id="_login-inputPwd">
-                            <span class="error-info"></span>
+                            <span id="mm" style="display: none" class="error-info">密码不能为空</span>
                         </label>
-                        <button class="login-btn hu-btn btn-primary">登录</button>
+                        <button class="login-btn hu-btn btn-primary" onclick="btn()">登录</button><br><br>
+                        <div>没有账号？<a style="color: #843534" href="#">立即注册！</a></div>
                     </div>
                 </div>
             </div>
@@ -70,11 +72,7 @@
 </div>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.global.min.js"></script>
-<script src="js/formDate.js"></script>
-<script src="js/config.js"></script>
-<script src="js/common.js"></script>
-<script src="js/login.js"></script>
 
+<script src="js/loginnew.js"></script>
 </body>
 </html>
