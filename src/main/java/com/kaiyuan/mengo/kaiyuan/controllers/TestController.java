@@ -64,8 +64,17 @@ public class TestController {
 
     @GetMapping("customization")
     public String customization() {
-
         return "customization";
+    }
+
+    @GetMapping("addTest")
+    public String addTest(){
+        return "test_add";
+    }
+
+    @GetMapping("test")
+    public String test() {
+        return "test";
     }
 
     @GetMapping("preview")
@@ -75,7 +84,7 @@ public class TestController {
         String fileType = strings[1].toLowerCase();
         //如果是csv文件就返回
         if (fileType.equals("csv")) {
-            String filePath = "F:\\upload\\" + fileName;//读取文件
+            String filePath = "/home/front_dev/upload/" + fileName;//读取文件
             String[] titles;
             model.addAttribute("fileName", fileName);
             try {
@@ -102,15 +111,15 @@ public class TestController {
             }
         } else {
             //否则就是json文件
-            String filePath = "F:\\upload\\" + fileName;//读取文件
+            String filePath = "/home/front_dev/upload/" + fileName;//读取文件
             String string = "";
             try {
                 FileInputStream inputStream = new FileInputStream(filePath);
-                InputStreamReader reader = new InputStreamReader(inputStream,"utf-8");
+                InputStreamReader reader = new InputStreamReader(inputStream, "utf-8");
                 BufferedReader br = new BufferedReader(reader);
                 String s = "";
-                while((s = br.readLine())!=null){
-                        string+=s;
+                while ((s = br.readLine()) != null) {
+                    string += s;
                 }
                 br.close();
             } catch (FileNotFoundException e) {
@@ -123,7 +132,7 @@ public class TestController {
             JSONObject jsonObject = new JSONObject(string);
             String userJson = JsonFormat.format(jsonObject.toString());
             System.out.println(userJson);
-            model.addAttribute("userJson",userJson);
+            model.addAttribute("userJson", userJson);
             return "temp";
         }
         return "fail";
@@ -177,7 +186,7 @@ public class TestController {
         //String fileName = file.getOriginalFilename();
         //文件存储路径
         for (int i = 0; i < files.length; i++) {
-            String filePath = "F:\\upload\\" + fileName[i];//"F:\\upload\\"
+            String filePath = "/home/front_dev/upload/" + fileName[i];//"F:\\upload\\"
             System.out.println(fileName[i]);
             System.out.println(filePath);
             File dest = new File(filePath);

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>adduser</title>
+</head>
+<body>
+<div>
+    <form id="my_form">
+        <input type="text" name="userName">用户名
+        <input type="password" name="password">密码
+        <button type="button" onclick="btnClick()">提交</button>
+    </form>
+</div>
+</body>
+<script src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.serializeJSON/2.9.0/jquery.serializejson.min.js"></script>
+<script>
+    function btnClick() {
+        var s = $('#my_form').serialize();
+        console.info(s);
+        $.ajax({
+                url: '/addUser',
+                type: 'post',
+                dataType: 'json',//指定这个后，返回的也必须是json数据
+                data: s,
+                success: function (data) {
+                    console.log(JSON.stringify(data));
+                    with (data) {
+                        console.log(status);
+                    }
+                    if (data['status'] == 'ok') {
+                        alert("ok");
+                    } else if (data['status'] == 'exist') {
+                        alert("用户名已存在");
+                    } else {
+                        alert("fail");
+                    }
+                },
+                error: function (error) {
+                    console.info(error.responseText);
+                }
+            }
+        )
+    }
+</script>
+</html>
