@@ -1,5 +1,6 @@
 package com.kaiyuan.mengo.kaiyuan;
 
+import com.kaiyuan.mengo.kaiyuan.utility.TaskIdUtil;
 import com.opencsv.CSVReader;
 import org.junit.Test;
 
@@ -29,6 +30,15 @@ public class MainTest {
                 System.out.println(nexLine[j]);
             }
         }
+    }
+
+    /*
+    测试随机数工具
+     */
+    @Test
+    public void testUtil(){
+        String id = TaskIdUtil.getUUID();
+        System.out.println(id);
     }
 
 }

@@ -34,8 +34,6 @@ public class UserService {
     /*
     根据用户名查找，登录检查使用
      */
-
-
     public Users findUserByName(String name){
         return userDao.findByUserName(name);
     }

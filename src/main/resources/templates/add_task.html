@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面-新增任务</title>
+</head>
+<body>
+    <p th:text="${session.userName}" id="userName"></p>
+<button onclick="btn()">增加</button>
+</body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+    function btn() {
+        var name = $('#userName').text();
+        console.log(name);
+        $.ajax({
+            type:'post',
+            url:'/api/addNewTask',
+            data:{"name":name},
+            success:function (data) {
+                console.log(data);
+            }
+        })
+    }
+</script>
+</html>

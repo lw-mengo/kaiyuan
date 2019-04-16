@@ -51,19 +51,21 @@
                 <div class="loginBox">
                     <div class="loginForm" id="loginForm">
 
-                        <div class="login-title">登录</div>
+                        <div class="login-title">注册</div>
                         <label class="login-line">
                             <span class="login-label">用户名</span>
-                            <input type="text" class="hu-input input-primary" placeholder="请输入用户名" id="_login-inputPhone">
+                            <input type="text" class="hu-input input-primary" placeholder="请输入用户名"
+                                   id="_login-inputPhone">
                             <span id="yhm" style="display: none" class="error-info">用户名不能为空</span>
                         </label>
                         <label class="login-line">
                             <span class="login-label">密码</span>
-                            <input type="password" class="hu-input input-primary" placeholder="请输入密码" id="_login-inputPwd">
+                            <input type="password" class="hu-input input-primary" placeholder="请输入密码"
+                                   id="_login-inputPwd">
                             <span id="mm" style="display: none" class="error-info">密码不能为空</span>
                         </label>
-                        <button class="login-btn hu-btn btn-primary" onclick="btn()">登录</button><br><br>
-                        <div>没有账号？<a style="color: #843534" href="/register">立即注册！</a></div>
+                        <button class="login-btn hu-btn btn-primary" onclick="btn()">注册</button>
+                        <br><br>
                     </div>
                 </div>
             </div>
@@ -73,6 +75,45 @@
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
-<script src="js/loginnew.js"></script>
+<script>
+    function btn() {
+        var uname=$('#_login-inputPhone').val();
+        var pass=$('#_login-inputPwd').val();
+        $.ajax({
+            url: '/api/addUser',
+            type: 'post',
+            dataType: 'json',//指定这个后，返回的也必须是json数据
+            data: {"userName":uname,"password":pass},
+            success: function (data) {
+                console.log(JSON.stringify(data));
+                with (data) {
+                    console.log(status);
+                }
+                if (data['status'] == 'ok') {
+                    alert("注册成功");
+                } else if (data['status'] == 'exist') {
+                    $("#yhm").html("用户名已存在！").show();
+                } else {
+                    alert("注册失败");
+                }
+            },
+            error: function (error) {
+                console.info(error.responseText);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $("input").blur(function () {
+            if ($(this).val() == "") {
+                $(this).next().show();
+            } else {
+                $(this).next().hide();
+            }
+        });
+    })
+
+
+</script>
 </body>
 </html>

@@ -66,16 +66,14 @@ public class TestController {
     public String customization() {
         return "customization";
     }
-
-    @GetMapping("addTest")
-    public String addTest(){
-        return "test_add";
+    /*
+    注册页面
+     */
+    @GetMapping("register")
+    public String register(){
+        return "register";
     }
 
-    @GetMapping("test")
-    public String test() {
-        return "test";
-    }
 
     @GetMapping("preview")
     public String preview(@RequestParam("fileName") String fileName, Model model) {
@@ -201,5 +199,22 @@ public class TestController {
             }
         }
         return "fail";
+    }
+
+
+    //以下均为测试页面
+    @GetMapping("addTest")
+    public String addTest(){
+        return "test_add";
+    }
+
+    @GetMapping("test")
+    public String test() {
+        return "test";
+    }
+
+    @GetMapping("addTask")
+    public String addTask(){
+        return "add_task";
     }
 }

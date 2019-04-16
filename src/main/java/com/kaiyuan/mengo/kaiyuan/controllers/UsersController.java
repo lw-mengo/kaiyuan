@@ -8,13 +8,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("api")
 public class UsersController {
     public static final Logger log = LoggerFactory.getLogger(UsersController.class);
 
@@ -25,20 +28,31 @@ public class UsersController {
     用户登录action
      */
     @PostMapping(value = "/loginAction")
-    public String findUserByName(@RequestParam(name = "name") String name, @RequestParam(name = "password") String password) {
+    public String findUserByName(@RequestParam(name = "userName") String name, @RequestParam(name = "password") String password, HttpServletRequest request) {
         Users user = userService.findUserByName(name);
-        log.info(name);
         if (user != null) {
             //必须解析密码
             String salt = user.getPassword_salt();
             password = DigestUtil.sha256Digest(password+salt);
             if (user.getPassword().equals(password)) {
-                return "success";
+                HttpSession session = request.getSession();//如果有session，就获取。没有就创建session
+                session.setAttribute("userName",user.getUserName());
+                session.setMaxInactiveInterval(30*60);//session有效时间，30分钟
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("status", "success");
+               // return "success";
+                return jsonObject.toString();
             } else {
-                return "password_error";
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("status", "password_error");
+              //  return "password_error";//密码错误
+                return jsonObject.toString();
             }
         } else {
-            return "user_error";
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("status", "user_error");
+          //  return "user_error";//用户不存在
+            return jsonObject.toString();
         }
     }
 
@@ -58,7 +72,6 @@ public class UsersController {
             user.setUserName(name);
             user.setPassword(password);
             user.setPassword_salt(salt);
-            log.info(password);
             userService.addUser(user);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("status", "ok");
