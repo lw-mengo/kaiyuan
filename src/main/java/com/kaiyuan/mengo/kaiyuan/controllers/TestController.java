@@ -1,14 +1,12 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
+import com.google.gson.Gson;
+import com.kaiyuan.mengo.kaiyuan.utility.CommonResult;
 import com.kaiyuan.mengo.kaiyuan.utility.JsonFormat;
 import com.opencsv.CSVReader;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -66,17 +64,21 @@ public class TestController {
     public String customization() {
         return "customization";
     }
+
     /*
     注册页面
      */
     @GetMapping("register")
-    public String register(){
+    public String register() {
         return "register";
     }
 
-
+    /*
+    预览文件请求
+     */
     @GetMapping("preview")
-    public String preview(@RequestParam("fileName") String fileName, Model model) {
+    @ResponseBody
+    public String preview(@RequestParam("fileName") String fileName) {
         //根据文件名判断是什么类型
         String[] strings = fileName.split("\\.");
         String fileType = strings[1].toLowerCase();
@@ -84,7 +86,7 @@ public class TestController {
         if (fileType.equals("csv")) {
             String filePath = "/home/front_dev/upload/" + fileName;//读取文件
             String[] titles;
-            model.addAttribute("fileName", fileName);
+            //  model.addAttribute("fileName", fileName);
             try {
                 //使用opencsv
                 CSVReader reader = new CSVReader(new FileReader(filePath));
@@ -92,7 +94,10 @@ public class TestController {
                 List<String[]> list = new ArrayList<>();//一定要初始化
                 if (nextLine != null) {
                     titles = nextLine;
-                    model.addAttribute("title", titles);
+                    String[] title = titles;
+                    list.add(title);
+
+                    //     model.addAttribute("title", titles);
                 }
                 for (int i = 0; i < 15; i++) {
                     String[] next = reader.readNext();
@@ -100,10 +105,9 @@ public class TestController {
                         list.add(next);
                     }
                 }
-                int length = list.size();
-                System.out.println(length);
-                model.addAttribute("dataList", list);
-                return "preview";
+                //   int length = list.size();
+                //    model.addAttribute("dataList", list);
+                return new Gson().toJson(list);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -129,11 +133,11 @@ public class TestController {
             }
             JSONObject jsonObject = new JSONObject(string);
             String userJson = JsonFormat.format(jsonObject.toString());
-            System.out.println(userJson);
-            model.addAttribute("userJson", userJson);
-            return "temp";
+            //   model.addAttribute("userJson", userJson);
+            return userJson;
+            //return "temp";
         }
-        return "fail";
+        return CommonResult.fail();
     }
 
     @GetMapping("customization_browse")
@@ -175,36 +179,39 @@ public class TestController {
         return "temp";
     }
 
+    /*
+    上传文件接收
+     */
     @PostMapping("/my_upload")
+    @ResponseBody
     public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName) {
         if (files == null || files.length == 0) {
-            return "fail";
-        }
-        //获取文件名
-        //String fileName = file.getOriginalFilename();
-        //文件存储路径
-        for (int i = 0; i < files.length; i++) {
-            String filePath = "/home/front_dev/upload/" + fileName[i];//"F:\\upload\\"
-            System.out.println(fileName[i]);
-            System.out.println(filePath);
-            File dest = new File(filePath);
-            MultipartFile file = files[i];
-            if (!dest.getParentFile().exists()) {
-                dest.getParentFile().mkdirs();
+            return CommonResult.fail();
+        } else {
+            //获取文件名
+            //String fileName = file.getOriginalFilename();
+            //文件存储路径
+            for (int i = 0; i < files.length; i++) {
+                String filePath = "/home/front_dev/upload/" + fileName[i];//"F:\\upload\\"
+                File dest = new File(filePath);
+                MultipartFile file = files[i];
+                if (!dest.getParentFile().exists()) {
+                    dest.getParentFile().mkdirs();
+                }
+                try {
+                    file.transferTo(dest);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-            try {
-                file.transferTo(dest);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            return CommonResult.success();
         }
-        return "fail";
     }
 
 
     //以下均为测试页面
     @GetMapping("addTest")
-    public String addTest(){
+    public String addTest() {
         return "test_add";
     }
 
@@ -214,7 +221,9 @@ public class TestController {
     }
 
     @GetMapping("addTask")
-    public String addTask(){
+    public String addTask() {
         return "add_task";
     }
+
+
 }
