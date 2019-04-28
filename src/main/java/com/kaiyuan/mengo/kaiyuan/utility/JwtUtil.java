@@ -11,7 +11,7 @@ import java.util.Date;
 public class JwtUtil {
 
     private static final String BASE_KEY = "650871de1d5250d3aaf77ed21c5d7a3806427f6a8de217490fab4927e0019e3e";//私钥
-    private static long TOKEN_EXP = 1000 * 60 * 30;//过期时间，30分钟
+    private static long TOKEN_EXP = 1000 * 60 * 5;//过期时间，?分钟
 
     public static String getToken(String userName) {
         return Jwts.builder()

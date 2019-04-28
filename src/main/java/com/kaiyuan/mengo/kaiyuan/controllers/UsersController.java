@@ -37,6 +37,7 @@ public class UsersController {
             if (user.getPassword().equals(password)) {
                 JSONObject jsonObject = new JSONObject();
                 String token = JwtUtil.getToken(name);//登录成功，返回一个token
+                jsonObject.put("status","success");
                 jsonObject.put("token", token);
                // return "success";
                 return jsonObject.toString();
