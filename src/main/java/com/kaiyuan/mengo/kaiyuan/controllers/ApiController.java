@@ -1,17 +1,24 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
+import com.kaiyuan.mengo.kaiyuan.entity.UserGallery;
+import com.kaiyuan.mengo.kaiyuan.services.UserGalleryService;
 import com.kaiyuan.mengo.kaiyuan.utility.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api")
 public class ApiController {
     private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
+
+    @Autowired
+    private UserGalleryService userGalleryService;//用户图库的服务
+
+
     /**
      * @param nodeLabelList 显示的节点的类型  string[]  all
      * @param edgeLabelList 显示的边的类型  string[] all
@@ -87,4 +94,11 @@ public class ApiController {
         return CommonResult.success();
     }
 
+    /**
+     * 获取当前用户所有的图库数据
+     */
+    @GetMapping("getGallery")
+    public String getGallery(){
+        return userGalleryService.findAll();
+    }
 }

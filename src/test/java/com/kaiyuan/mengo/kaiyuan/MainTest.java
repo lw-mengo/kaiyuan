@@ -2,6 +2,7 @@ package com.kaiyuan.mengo.kaiyuan;
 
 import com.kaiyuan.mengo.kaiyuan.utility.CommonResult;
 import com.kaiyuan.mengo.kaiyuan.utility.TaskIdUtil;
+import com.kaiyuan.mengo.kaiyuan.utility.UIDUtil;
 import com.opencsv.CSVReader;
 import org.junit.Test;
 
@@ -46,6 +47,14 @@ public class MainTest {
     public void testResult(){
         String str = CommonResult.success();
         System.out.println(str);
+    }
+
+    /*
+    测试下uid生成
+     */
+    @Test
+    public void testUid(){
+        System.out.println(UIDUtil.getUid());
     }
 
 }

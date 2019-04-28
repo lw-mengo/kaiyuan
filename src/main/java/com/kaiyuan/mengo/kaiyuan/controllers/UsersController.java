@@ -3,6 +3,8 @@ package com.kaiyuan.mengo.kaiyuan.controllers;
 import com.kaiyuan.mengo.kaiyuan.entity.Users;
 import com.kaiyuan.mengo.kaiyuan.services.UserService;
 import com.kaiyuan.mengo.kaiyuan.utility.DigestUtil;
+import com.kaiyuan.mengo.kaiyuan.utility.JwtUtil;
+import com.kaiyuan.mengo.kaiyuan.utility.UIDUtil;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @RestController
@@ -28,18 +28,16 @@ public class UsersController {
     用户登录action
      */
     @PostMapping(value = "/loginAction")
-    public String findUserByName(@RequestParam(name = "userName") String name, @RequestParam(name = "password") String password, HttpServletRequest request) {
+    public String findUserByName(@RequestParam(name = "userName") String name, @RequestParam(name = "password") String password) {
         Users user = userService.findUserByName(name);
         if (user != null) {
             //必须解析密码
             String salt = user.getPassword_salt();
             password = DigestUtil.sha256Digest(password+salt);
             if (user.getPassword().equals(password)) {
-                HttpSession session = request.getSession();//如果有session，就获取。没有就创建session
-                session.setAttribute("userName",user.getUserName());
-                session.setMaxInactiveInterval(30*60);//session有效时间，30分钟
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("status", "success");
+                String token = JwtUtil.getToken(name);//登录成功，返回一个token
+                jsonObject.put("token", token);
                // return "success";
                 return jsonObject.toString();
             } else {
@@ -72,6 +70,7 @@ public class UsersController {
             user.setUserName(name);
             user.setPassword(password);
             user.setPassword_salt(salt);
+            user.setUid(UIDUtil.getUid());//UID实际上是要唯一的
             userService.addUser(user);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("status", "ok");
