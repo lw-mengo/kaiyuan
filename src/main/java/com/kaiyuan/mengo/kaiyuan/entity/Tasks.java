@@ -20,6 +20,8 @@ public class Tasks {
 
     private String file_name;
 
+    private int  uid;
+
     private boolean payed;
 
     public int getId() {
@@ -42,7 +44,7 @@ public class Tasks {
         return created_name;
     }
 
-    public void setCreate_name(String created_name) {
+    public void setCreated_name(String created_name) {
         this.created_name = created_name;
     }
 
@@ -69,4 +71,14 @@ public class Tasks {
     public void setFile_name(String file_name) {
         this.file_name = file_name;
     }
+
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
 }

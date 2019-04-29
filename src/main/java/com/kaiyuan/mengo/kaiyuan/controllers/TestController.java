@@ -1,20 +1,39 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
 import com.google.gson.Gson;
+import com.kaiyuan.mengo.kaiyuan.entity.Tasks;
+import com.kaiyuan.mengo.kaiyuan.entity.Users;
+import com.kaiyuan.mengo.kaiyuan.services.TaskService;
+import com.kaiyuan.mengo.kaiyuan.services.UserGalleryService;
+import com.kaiyuan.mengo.kaiyuan.services.UserService;
 import com.kaiyuan.mengo.kaiyuan.utility.CommonResult;
 import com.kaiyuan.mengo.kaiyuan.utility.JsonFormat;
+import com.kaiyuan.mengo.kaiyuan.utility.TaskIdUtil;
 import com.opencsv.CSVReader;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class TestController {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private TaskService taskService;
+    @Autowired
+    private UserGalleryService userGalleryService;
+
+
+
     @RequestMapping("/")
     public String index() {
         return "index";
@@ -184,7 +203,7 @@ public class TestController {
      */
     @PostMapping("/my_upload")
     @ResponseBody
-    public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName) {
+    public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName, HttpServletRequest request) {
         if (files == null || files.length == 0) {
             return CommonResult.fail();
         } else {
@@ -204,6 +223,18 @@ public class TestController {
                     e.printStackTrace();
                 }
             }
+            System.out.println(request.getAttribute("username").toString());
+            String name = request.getAttribute("username").toString();
+            Users users = userService.findUserByName(name);
+            Tasks task = new Tasks();
+            String taskId = TaskIdUtil.getUUID();
+            task.setTaskid(taskId);
+            task.setCreated_name(name);
+            task.setFile_path("/home/front_dev/upload/");
+            task.setFile_name(fileName[0]);
+            task.setUid(users.getUid());
+            taskService.addNewTask(task);
+            userGalleryService.saveResult(taskId,name);
             return CommonResult.success();
         }
     }

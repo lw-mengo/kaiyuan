@@ -31,7 +31,7 @@ public class TasksController {
         String file_name = "test";
         Tasks tasks = new Tasks();
         tasks.setTaskid(taskId);
-        tasks.setCreate_name(name);
+        tasks.setCreated_name(name);
         tasks.setFile_name(file_name);
         tasks.setFile_path(file_path);
         tasks.setPayed(true);

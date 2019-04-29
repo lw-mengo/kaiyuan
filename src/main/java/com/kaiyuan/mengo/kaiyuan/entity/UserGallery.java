@@ -1,11 +1,9 @@
 package com.kaiyuan.mengo.kaiyuan.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
 @Table(name = "user_gallery")
@@ -17,9 +15,9 @@ public class UserGallery {
     private String username;
     private String result_url;
     private String image_url;
-
+    private String result_type;
     private Timestamp created_time;
-
+    private int uid;
     private String preview;
     private String preview_online;
     private String taskid;
@@ -88,5 +86,21 @@ public class UserGallery {
 
     public void setTaskid(String taskid) {
         this.taskid = taskid;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public String getResult_type() {
+        return result_type;
+    }
+
+    public void setResult_type(String result_type) {
+        this.result_type = result_type;
     }
 }

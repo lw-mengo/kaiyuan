@@ -18,4 +18,12 @@ public class TaskService {
     public void addNewTask(Tasks tasks){
         taskDao.save(tasks);
     }
+
+    /*
+    查找一个任务
+     */
+
+    public Tasks findTask(String taskId){
+        return taskDao.findByTaskid(taskId);
+    }
 }

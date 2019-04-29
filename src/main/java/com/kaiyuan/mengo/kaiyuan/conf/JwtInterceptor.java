@@ -4,6 +4,7 @@ import com.kaiyuan.mengo.kaiyuan.utility.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +18,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
         String authHeader = request.getHeader("Authorization");
 //        System.out.println(authHeader);
         if (authHeader == null||!authHeader.startsWith("Bearer ")){
-            throw new  Exception("10001");//用户未登录
+            throw new ServletException("10001");//用户未登录
         }
         //取得token
 

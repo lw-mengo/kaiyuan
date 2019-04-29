@@ -1,14 +1,11 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
-import com.kaiyuan.mengo.kaiyuan.entity.UserGallery;
 import com.kaiyuan.mengo.kaiyuan.services.UserGalleryService;
 import com.kaiyuan.mengo.kaiyuan.utility.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api")
@@ -96,9 +93,18 @@ public class ApiController {
 
     /**
      * 获取当前用户所有的图库数据
+     * @return 返回结果集
      */
     @GetMapping("getGallery")
     public String getGallery(){
         return userGalleryService.findAll();
+    }
+
+    /**
+     * 根据taskID 返回数据结果
+     */
+    @GetMapping("getResultByTaskId")
+    public String  getResultByTaskId(@RequestParam("taskId")String taskId){
+        return userGalleryService.getResultByTaskId(taskId);
     }
 }

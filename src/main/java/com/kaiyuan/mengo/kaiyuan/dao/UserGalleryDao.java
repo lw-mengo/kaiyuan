@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserGalleryDao extends JpaRepository<UserGallery,Integer> {
     @Override
     List<UserGallery> findAll();
+
+    List<UserGallery> findByTaskid(String taskId);
 }
