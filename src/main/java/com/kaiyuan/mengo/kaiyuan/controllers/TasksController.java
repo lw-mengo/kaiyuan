@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/api")
 public class TasksController {
@@ -55,7 +57,13 @@ public class TasksController {
 
     }
 
-    /*
-      TODO-查找任务
+    /**
+      列出用户所有任务
      */
+    @ResponseBody
+    @GetMapping("listAllTask")
+    public String listAllTask(HttpServletRequest request){
+        String name =  request.getAttribute("username").toString();
+        return service.listAllTasks(name);
+    }
 }

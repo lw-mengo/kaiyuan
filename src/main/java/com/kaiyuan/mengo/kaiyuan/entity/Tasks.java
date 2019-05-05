@@ -1,9 +1,6 @@
 package com.kaiyuan.mengo.kaiyuan.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "task_table")
@@ -14,7 +11,8 @@ public class Tasks {
 
     private String taskid;
 
-    private String created_name;
+    @Column(name="created_name")
+    private String createdName;
 
     private String file_path;
 
@@ -41,11 +39,11 @@ public class Tasks {
     }
 
     public String getCreated_name() {
-        return created_name;
+        return createdName;
     }
 
     public void setCreated_name(String created_name) {
-        this.created_name = created_name;
+        this.createdName = created_name;
     }
 
     public String getFile_path() {
