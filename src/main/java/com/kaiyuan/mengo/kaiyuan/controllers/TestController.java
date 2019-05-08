@@ -204,6 +204,8 @@ public class TestController {
     @PostMapping("/my_upload")
     @ResponseBody
     public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName, HttpServletRequest request) {
+
+        String file_name = "";
         if (files == null || files.length == 0) {
             return CommonResult.fail();
         } else {
@@ -212,6 +214,7 @@ public class TestController {
             //文件存储路径
             for (int i = 0; i < files.length; i++) {
                 String filePath = "/home/front_dev/upload/" + fileName[i];//"F:\\upload\\"
+                file_name +=fileName[i]+",";
                 File dest = new File(filePath);
                 MultipartFile file = files[i];
                 if (!dest.getParentFile().exists()) {
@@ -223,7 +226,7 @@ public class TestController {
                     e.printStackTrace();
                 }
             }
-            System.out.println(request.getAttribute("username").toString());
+            System.out.println(file_name);
             String name = request.getAttribute("username").toString();
             Users users = userService.findUserByName(name);
             Tasks task = new Tasks();

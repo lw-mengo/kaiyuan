@@ -9,6 +9,7 @@ public interface TaskDao extends JpaRepository<Tasks,Integer> {
     //根据taskid查找任务
     Tasks findByTaskid(String taskId);
 
-    //列出每个用户的所有任务列表
+    //列出每个用户的所有任务列表&列出每个用户的数据集
     List<Tasks> findAllByCreatedNameOrderById(String created_name);
+
 }
