@@ -11,16 +11,25 @@ public class Tasks {
 
     private String taskid;
 
-    @Column(name="created_name")
+    @Column(name = "created_name")
     private String createdName;
 
     private String file_path;
 
     private String file_name;
 
-    private int  uid;
+    private int uid;
 
     private boolean payed;
+    private String cypher;
+
+    public String getCypher() {
+        return cypher;
+    }
+
+    public void setCypher(String cypher) {
+        this.cypher = cypher;
+    }
 
     public int getId() {
         return id;

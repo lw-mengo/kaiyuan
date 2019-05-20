@@ -20,8 +20,9 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/image/**").addResourceLocations("file:/home/front_dev/upload/");//注意路径前的file:
     }
+
     /**
-    token拦截器配置
+     * token拦截器配置
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -30,6 +31,4 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/**", "/preview", "/my_upload")
                 .excludePathPatterns("/api/loginAction", "/api/addUser", "/image/**");//去掉不需要token的请求
     }
-
-
 }

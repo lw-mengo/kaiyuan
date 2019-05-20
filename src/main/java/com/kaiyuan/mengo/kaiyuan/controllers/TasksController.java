@@ -1,6 +1,5 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
-import com.kaiyuan.mengo.kaiyuan.beans.ConfigFile;
 import com.kaiyuan.mengo.kaiyuan.entity.Tasks;
 import com.kaiyuan.mengo.kaiyuan.services.TaskService;
 import com.kaiyuan.mengo.kaiyuan.utility.CommonResult;
@@ -19,10 +18,11 @@ public class TasksController {
     @Autowired
     private TaskService service;
 
-    private Logger  logger = LoggerFactory.getLogger(this.getClass());
+
     /**
      * 向数据库增加一个任务
-     * @param name  增加任务的用户名
+     *
+     * @param name 增加任务的用户名
      * @return 返回状态 成功
      */
     @PostMapping("/addNewTask")
@@ -41,29 +41,29 @@ public class TasksController {
         return "ok";
     }
 
-    /**
-     * @param configFile 需要这个实例里的四个参数
-     * @return 返回成功与否的json
-     */
-    @PostMapping("getConfig")
-    @ResponseBody
-    public String getConfig(@RequestBody ConfigFile configFile){
-        if (configFile!=null){
-            logger.info(configFile.getNodeAttribute());
-            return CommonResult.success();
-        }else {
-            return CommonResult.fail();
-        }
+//    /**
+//     * @param cypherStr 用于csv文件的一个查询语句
+//     * @return 返回成功与否的json
+//     */
+//    @PostMapping("getConfig")
+//    @ResponseBody
+//    public String getConfig(@RequestParam("cypherStr") String cypherStr) {
+//        if (cypherStr != "" || cypherStr.isEmpty()) {
+//
+//            return CommonResult.success();
+//        } else {
+//            return CommonResult.fail();
+//        }
+//
+//    }
 
-    }
-
     /**
-      列出用户所有任务
+     * 列出用户所有任务
      */
     @ResponseBody
     @GetMapping("listAllTask")
-    public String listAllTask(HttpServletRequest request){
-        String name =  request.getAttribute("username").toString();
+    public String listAllTask(HttpServletRequest request) {
+        String name = request.getAttribute("username").toString();
         return service.listAllTasks(name);
     }
 }

@@ -25,7 +25,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
         String token = authHeader.substring(7);
         //验证token
         Claims claims = JwtUtil.checkToken(token);
-        request.setAttribute("username",claims.getSubject());
+        request.setAttribute("username",claims.getSubject());//这里获取到登录的用户名，保存在request中
         return true;
     }
 }

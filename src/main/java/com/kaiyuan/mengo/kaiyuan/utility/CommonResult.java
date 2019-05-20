@@ -20,6 +20,13 @@ public class CommonResult {
         String result = new Gson().toJson(map);
         return result;
     }
+    public static String success(String msg) {
+        Map<String, String> map = new HashMap<>();
+        map.put(STATUS, SUCCESS);
+        map.put("data",msg);
+        String result = new Gson().toJson(map);
+        return result;
+    }
 
     public static String fail() {
         Map<String, String> map = new HashMap<>();

@@ -1,15 +1,5 @@
 package com.kaiyuan.mengo.kaiyuan;
 
-import com.kaiyuan.mengo.kaiyuan.services.TaskService;
-import com.kaiyuan.mengo.kaiyuan.utility.CommonResult;
-import com.kaiyuan.mengo.kaiyuan.utility.TaskIdUtil;
-import com.kaiyuan.mengo.kaiyuan.utility.UIDUtil;
-import com.opencsv.CSVReader;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.io.FileReader;
-
 public class MainTest {
 
 //    @Test
@@ -72,6 +62,68 @@ public class MainTest {
 //            System.out.println(key+"="+hashMap.get(key));
 //        }
 //
+//    }
+//
+//    interface Callback {
+//        void receiveNotification(String string);
+//    }
+//
+//    class Leader implements Callback {
+//        @Override
+//        public void receiveNotification(String string) {
+//            System.out.println(string);
+//        }
+//
+//        public void assignTask(Developer student){
+//            student.doTask(this);
+//        }
+//
+//        public void assignTask(Thread thread){
+//            thread.start();
+//        }
+//    }
+//
+//    class Developer {
+//        private String name;
+//
+//        void doTask(Callback callback) {
+//            try {
+//                Thread.sleep(3000);
+//                System.out.println("3S delete");
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            callback.receiveNotification(this.name + "complete the task");
+//        }
+//
+//        public Developer(String name) {
+//            this.name = name;
+//        }
+//    }
+//
+//    @Test
+//    public void test(){
+//        Leader leader = new Leader();
+//        Developer xiao = new Developer("xiaoming");
+//        leader.assignTask(new DoJobThread(xiao,leader));
+//        DoJobThread doJobThread = new DoJobThread(xiao,leader);
+//        doJobThread.run();
+//
+//    }
+//
+//    static class DoJobThread extends Thread{
+//        private Developer student;
+//        private Leader teacher;
+//
+//        @Override
+//        public void run() {
+//            student.doTask(teacher);
+//        }
+//
+//        public DoJobThread(Developer student,Leader teacher){
+//            this.student = student;
+//            this.teacher = teacher;
+//        }
 //    }
 
 

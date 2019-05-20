@@ -3,6 +3,7 @@ package com.kaiyuan.mengo.kaiyuan.controllers;
 import com.google.gson.Gson;
 import com.kaiyuan.mengo.kaiyuan.entity.Tasks;
 import com.kaiyuan.mengo.kaiyuan.entity.Users;
+import com.kaiyuan.mengo.kaiyuan.services.TaskInfoService;
 import com.kaiyuan.mengo.kaiyuan.services.TaskService;
 import com.kaiyuan.mengo.kaiyuan.services.UserGalleryService;
 import com.kaiyuan.mengo.kaiyuan.services.UserService;
@@ -31,7 +32,8 @@ public class TestController {
     private TaskService taskService;
     @Autowired
     private UserGalleryService userGalleryService;
-
+    @Autowired
+    private TaskInfoService taskInfoService;
 
 
     @RequestMapping("/")
@@ -92,8 +94,8 @@ public class TestController {
         return "register";
     }
 
-    /*
-    预览文件请求
+    /**
+     * 预览文件请求
      */
     @GetMapping("preview")
     @ResponseBody
@@ -198,12 +200,17 @@ public class TestController {
         return "temp";
     }
 
-    /*
-    上传文件接收
+    /**
+     * 上传文件接收
+     *
+     * @param files     文件
+     * @param fileName  文件名
+     * @param cypherStr cypher查询语句
      */
     @PostMapping("/my_upload")
     @ResponseBody
-    public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName, HttpServletRequest request) {
+    public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName,
+                             @RequestParam("cypherStr") String cypherStr, HttpServletRequest request) {
 
         String file_name = "";
         if (files == null || files.length == 0) {
@@ -214,7 +221,7 @@ public class TestController {
             //文件存储路径
             for (int i = 0; i < files.length; i++) {
                 String filePath = "/home/front_dev/upload/" + fileName[i];//"F:\\upload\\"
-                file_name +=fileName[i]+",";
+                file_name += fileName[i] + ",";
                 File dest = new File(filePath);
                 MultipartFile file = files[i];
                 if (!dest.getParentFile().exists()) {
@@ -226,19 +233,30 @@ public class TestController {
                     e.printStackTrace();
                 }
             }
-            System.out.println(file_name);
+//            System.out.println(file_name);
             String name = request.getAttribute("username").toString();
             Users users = userService.findUserByName(name);
             Tasks task = new Tasks();
+//            TaskInfo taskInfo = new TaskInfo();
             String taskId = TaskIdUtil.getUUID();
             task.setTaskid(taskId);
             task.setCreated_name(name);
             task.setFile_path("/home/front_dev/upload/");
-            task.setFile_name(fileName[0]);
+            if (files.length == 1) {
+                task.setFile_name(fileName[0]);
+            } else {
+                task.setFile_name(file_name);
+            }
+            task.setCypher(cypherStr);
             task.setUid(users.getUid());
+//            Handler handler = new Handler(taskId);//暂时不需要
+//            taskInfo.setInfo(handler.getInfo());
+//            taskInfo.setTaskid(taskId);
+//            taskInfoService.add(taskInfo);
             taskService.addNewTask(task);
-            userGalleryService.saveResult(taskId,name);
-            return CommonResult.success();
+            userGalleryService.saveResult(taskId, name, cypherStr);
+
+            return CommonResult.success(taskId);//返回数据里带有taskID给前端
         }
     }
 
