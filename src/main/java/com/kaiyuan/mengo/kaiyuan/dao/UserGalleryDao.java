@@ -10,4 +10,6 @@ public interface UserGalleryDao extends JpaRepository<UserGallery,Integer> {
     List<UserGallery> findAll();
 
     List<UserGallery> findByTaskid(String taskId);
+
+//    UserGallery findByTaskid(String taskId);
 }

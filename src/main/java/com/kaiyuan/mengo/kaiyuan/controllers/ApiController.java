@@ -1,6 +1,6 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
-import DrawSDK.Handler;
+import com.kaiyuan.mengo.kaiyuan.factory.HandlerFactory;
 import com.kaiyuan.mengo.kaiyuan.services.UserGalleryService;
 import com.kaiyuan.mengo.kaiyuan.utility.CommonResult;
 import org.json.JSONObject;
@@ -8,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 给前端使用的api
@@ -22,6 +20,8 @@ public class ApiController {
     @Autowired
     private UserGalleryService userGalleryService;//用户图库的服务
 
+
+    //TODO 所有的图制作都要一个taskID 前端传入，然后根据对应方法制作图，并且保存到数据库
 
     /**
      * 过滤图
@@ -42,7 +42,7 @@ public class ApiController {
     @PostMapping("filtered")
     public String filtered(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage,
                            String nodeImageExpr, String initialScale, String nodeLabelList, String edgeLabelList, int minDegree,
-                           int maxDegree, HttpServletRequest request) {
+                           int maxDegree) {
         logger.info(nodeLabelList + "\n" + edgeLabelList + "\n" + minDegree + "\n" + maxDegree);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("titlePropertyName", titlePropertyName);
@@ -55,8 +55,7 @@ public class ApiController {
         jsonObject.put("nodeLabelList", nodeLabelList);
         jsonObject.put("edgeLabelList", edgeLabelList);
         jsonObject.put("minDegree", minDegree);
-        request.setAttribute("filtered", jsonObject.toString());
-        return CommonResult.success();
+        return CommonResult.success(HandlerFactory.getApp(1, jsonObject.toString()));
     }
 
     /**
@@ -67,7 +66,7 @@ public class ApiController {
      */
     @PostMapping("advanced_filtered")
     public String advancedFiltered(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
-                                   String initialScale, String cypher, HttpServletRequest request) {
+                                   String initialScale, String cypher) {
         logger.info(cypher);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("titlePropertyName", titlePropertyName);
@@ -78,8 +77,7 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("cypher", cypher);
-        request.setAttribute("advancedFiltered", jsonObject.toString());
-        return CommonResult.success();
+        return CommonResult.success(HandlerFactory.getApp(6, jsonObject.toString()));
     }
 
     /**
@@ -90,7 +88,7 @@ public class ApiController {
      */
     @PostMapping("sample")
     public String sample(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
-                         String initialScale, @RequestParam(value = "sampleSize") int sampleSize, HttpServletRequest request) {
+                         String initialScale, @RequestParam(value = "sampleSize") int sampleSize) {
         logger.info(String.valueOf(sampleSize));
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("titlePropertyName", titlePropertyName);
@@ -101,8 +99,7 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("sampleSize", sampleSize);
-        request.setAttribute("sample", jsonObject.toString());
-        return CommonResult.success();
+        return CommonResult.success(HandlerFactory.getApp(5, jsonObject.toString()));
     }
 
     /**
@@ -119,7 +116,7 @@ public class ApiController {
     @PostMapping("community")
     public String community(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
                             String initialScale, String nodeLabelList, int topN, int minCommunitySize, String communityBackgroundColors, String communityBorderColors,
-                            boolean allowOverlap, HttpServletRequest request) {
+                            boolean allowOverlap) {
         logger.info(nodeLabelList + "\n" + topN + "\n" + minCommunitySize + "\n" + communityBackgroundColors + "\n"
                 + communityBorderColors + "\n" + allowOverlap);
         JSONObject jsonObject = new JSONObject();
@@ -136,8 +133,7 @@ public class ApiController {
         jsonObject.put("communityBackgroundColors", communityBackgroundColors);
         jsonObject.put("communityBorderColors", communityBorderColors);
         jsonObject.put("allowOverlap", allowOverlap);
-        request.setAttribute("community", jsonObject.toString());
-        return CommonResult.success();
+        return CommonResult.success(HandlerFactory.getApp(4, jsonObject.toString()));
     }
 
     /**
@@ -148,7 +144,7 @@ public class ApiController {
      */
     @PostMapping("stepping")
     public String stepping(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
-                           String initialScale, String initialNodelds, HttpServletRequest request) {
+                           String initialScale, String initialNodelds) {
         logger.info(initialNodelds);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("titlePropertyName", titlePropertyName);
@@ -159,8 +155,8 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("initialNodelds", initialNodelds);
-        request.setAttribute("stepping", jsonObject.toString());
-        return CommonResult.success();
+
+        return CommonResult.success(HandlerFactory.getApp(2, jsonObject.toString()));
     }
 
     /**
@@ -172,7 +168,7 @@ public class ApiController {
      */
     @PostMapping("relate")
     public String relate(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
-                         String initialScale, String initialNodelds, int initialDepth, HttpServletRequest request) {
+                         String initialScale, String initialNodelds, int initialDepth) {
         logger.info(initialNodelds + "\n" + initialDepth);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("titlePropertyName", titlePropertyName);
@@ -184,8 +180,7 @@ public class ApiController {
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("initialNodelds", initialNodelds);
         jsonObject.put("initalDepth", initialDepth);
-        request.setAttribute("relate", jsonObject.toString());
-        return CommonResult.success();
+        return CommonResult.success(HandlerFactory.getApp(3, jsonObject.toString()));
     }
 
     /**
@@ -212,8 +207,7 @@ public class ApiController {
      */
 
     @GetMapping("getInfo")
-    public String getInfo(@RequestParam(value = "taskId") String taskId) {
-        Handler handler = new Handler(taskId);
-        return handler.getInfo();
+    public String getInfo() {
+        return HandlerFactory.getInfo();
     }
 }

@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kaiyuan.mengo.kaiyuan.dao.UserGalleryDao;
 import com.kaiyuan.mengo.kaiyuan.entity.UserGallery;
 import com.kaiyuan.mengo.kaiyuan.entity.Users;
+import com.kaiyuan.mengo.kaiyuan.factory.HandlerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -48,33 +50,58 @@ public class UserGalleryService {
         return result;
     }
 
-
     /**
      * 保存结果到数据库
+     * 文件是cvs还是json的情况下
      *
      * @param taskId 唯一的任务ID
      * @param name   创建者
      * @return 成功
      */
-    public void saveResult(String taskId, String name,String conf) {
+    @Async
+    public void saveResult(String taskId, String name, String conf) {
         Users user = userService.findUserByName(name);
 //        Tasks tasks = taskService.findTask(taskId);
 //        String conf = "test";
 //        System.out.println(conf);
-        Handler handler = new Handler(taskId);
-        UserGallery userGallery = new UserGallery();
-        userGallery.setCreated_time(new Timestamp(System.currentTimeMillis()));
-        userGallery.setTaskid(taskId);
-        userGallery.setUid(user.getUid());
-        userGallery.setUsername(name);
-        userGallery.setApp1(handler.getApp1(conf));
-        userGallery.setApp2(handler.getApp2(conf));
-        userGallery.setApp3(handler.getApp3(conf));
-        userGallery.setApp4(handler.getApp4(conf));
-        userGallery.setApp5(handler.getApp5(conf));
-        userGallery.setApp6(handler.getApp6(conf));
-        userGallery.setResult_url("no data");
-        dao.save(userGallery);
+        HandlerFactory handler = new HandlerFactory(taskId);
+        //根据conf的特征来判断是json还是cvs
+        if (conf.contains("json")) {
+            System.out.println("执行了json");
+            UserGallery userGallery = new UserGallery();
+            userGallery.setCreated_time(new Timestamp(System.currentTimeMillis()));
+            userGallery.setTaskid(taskId);
+            userGallery.setUid(user.getUid());
+            userGallery.setUsername(name);
+            userGallery.setApp1(handler.getApp(1, conf));
+            userGallery.setApp2("test");
+            userGallery.setApp3(handler.getApp(3, conf));
+            userGallery.setApp4(handler.getApp(4, conf));
+            userGallery.setApp5(handler.getApp(5, conf));
+            userGallery.setApp6(handler.getApp(6, conf));
+            userGallery.setResult_url("no data");
+            dao.save(userGallery);
+            HandlerFactory.uploadData(conf);
+
+
+        } else {
+            System.out.println("执行了cvs");
+            String[] strings = new String[]{"test1", "test2"};
+            UserGallery userGallery = new UserGallery();
+            userGallery.setCreated_time(new Timestamp(System.currentTimeMillis()));
+            userGallery.setTaskid(taskId);
+            userGallery.setUid(user.getUid());
+            userGallery.setUsername(name);
+            userGallery.setApp1(handler.getApp(1, conf));
+            userGallery.setApp2("test2");
+            userGallery.setApp3(handler.getApp(3, conf));
+            userGallery.setApp4(handler.getApp(4, conf));
+            userGallery.setApp5(handler.getApp(5, conf));
+            userGallery.setApp6(handler.getApp(6, conf));
+            userGallery.setResult_url("no data");
+            HandlerFactory.uploadData(strings, conf);
+            dao.save(userGallery);
+        }
 
 
 //        hashMap.get("app1");//全图浏览
@@ -136,6 +163,7 @@ public class UserGalleryService {
 //            dao.save(userGallery);
 //        }
     }
+
 
     /**
      * 根据taskID查找任务，并返回三个数据结果

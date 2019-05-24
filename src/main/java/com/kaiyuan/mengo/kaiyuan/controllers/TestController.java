@@ -1,5 +1,6 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
+import DrawSDK.Handler;
 import com.google.gson.Gson;
 import com.kaiyuan.mengo.kaiyuan.entity.Tasks;
 import com.kaiyuan.mengo.kaiyuan.entity.Users;
@@ -12,6 +13,8 @@ import com.kaiyuan.mengo.kaiyuan.utility.JsonFormat;
 import com.kaiyuan.mengo.kaiyuan.utility.TaskIdUtil;
 import com.opencsv.CSVReader;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +38,7 @@ public class TestController {
     @Autowired
     private TaskInfoService taskInfoService;
 
+    private static final Logger log = LoggerFactory.getLogger(TestController.class);
 
     @RequestMapping("/")
     public String index() {
@@ -210,11 +214,17 @@ public class TestController {
     @PostMapping("/my_upload")
     @ResponseBody
     public String uploadFile(@RequestParam("files") MultipartFile[] files, @RequestParam("fileName") String[] fileName,
-                             @RequestParam("cypherStr") String cypherStr, HttpServletRequest request) {
+                             String cypherStr, HttpServletRequest request) {
 
         String file_name = "";
+        String temp = fileName[0].split("\\.")[1].toLowerCase();
+        if (temp == "csv") {
+            if (files.length < 1) {
+                return CommonResult.fail("need two csv files");
+            }
+        }
         if (files == null || files.length == 0) {
-            return CommonResult.fail();
+            return CommonResult.fail("can not be null");
         } else {
             //获取文件名
             //String fileName = file.getOriginalFilename();
@@ -253,8 +263,18 @@ public class TestController {
 //            taskInfo.setInfo(handler.getInfo());
 //            taskInfo.setTaskid(taskId);
 //            taskInfoService.add(taskInfo);
-            taskService.addNewTask(task);
-            userGalleryService.saveResult(taskId, name, cypherStr);
+            taskService.addNewTask(task);//保存到task数据库
+            log.info(cypherStr);
+            if (cypherStr != null) {
+                log.info(" execute cvs method");
+                userGalleryService.saveResult(taskId, name, cypherStr);
+            } else {
+                log.info(" execute json method");
+                cypherStr = "/home/front_dev/upload/" + fileName[0];
+                userGalleryService.saveResult(taskId, name, cypherStr);
+            }
+
+//            handler.uploadData(fileName, cypherStr);
 
             return CommonResult.success(taskId);//返回数据里带有taskID给前端
         }
