@@ -1,6 +1,11 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
-import com.kaiyuan.mengo.kaiyuan.factory.HandlerFactory;
+import com.kaiyuan.mengo.kaiyuan.beans.TaskId;
+import com.kaiyuan.mengo.kaiyuan.entity.TaskInfo;
+import com.kaiyuan.mengo.kaiyuan.entity.Tasks;
+import com.kaiyuan.mengo.kaiyuan.entity.UserGallery;
+import com.kaiyuan.mengo.kaiyuan.services.TaskInfoService;
+import com.kaiyuan.mengo.kaiyuan.services.TaskService;
 import com.kaiyuan.mengo.kaiyuan.services.UserGalleryService;
 import com.kaiyuan.mengo.kaiyuan.utility.CommonResult;
 import org.json.JSONObject;
@@ -19,6 +24,12 @@ public class ApiController {
 
     @Autowired
     private UserGalleryService userGalleryService;//用户图库的服务
+    @Autowired
+    private TaskInfoService taskInfoService;
+    @Autowired
+    private TaskService taskService;
+
+
 
 
     //TODO 所有的图制作都要一个taskID 前端传入，然后根据对应方法制作图，并且保存到数据库
@@ -55,7 +66,8 @@ public class ApiController {
         jsonObject.put("nodeLabelList", nodeLabelList);
         jsonObject.put("edgeLabelList", edgeLabelList);
         jsonObject.put("minDegree", minDegree);
-        return CommonResult.success(HandlerFactory.getApp(1, jsonObject.toString()));
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        return CommonResult.success(userGallery.getApp1());
     }
 
     /**
@@ -77,7 +89,8 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("cypher", cypher);
-        return CommonResult.success(HandlerFactory.getApp(6, jsonObject.toString()));
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        return CommonResult.success(userGallery.getApp6());
     }
 
     /**
@@ -99,7 +112,8 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("sampleSize", sampleSize);
-        return CommonResult.success(HandlerFactory.getApp(5, jsonObject.toString()));
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        return CommonResult.success(userGallery.getApp5());
     }
 
     /**
@@ -133,7 +147,8 @@ public class ApiController {
         jsonObject.put("communityBackgroundColors", communityBackgroundColors);
         jsonObject.put("communityBorderColors", communityBorderColors);
         jsonObject.put("allowOverlap", allowOverlap);
-        return CommonResult.success(HandlerFactory.getApp(4, jsonObject.toString()));
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        return CommonResult.success(userGallery.getApp4());
     }
 
     /**
@@ -155,8 +170,8 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("initialNodelds", initialNodelds);
-
-        return CommonResult.success(HandlerFactory.getApp(2, jsonObject.toString()));
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        return CommonResult.success(userGallery.getApp2());
     }
 
     /**
@@ -180,7 +195,8 @@ public class ApiController {
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("initialNodelds", initialNodelds);
         jsonObject.put("initalDepth", initialDepth);
-        return CommonResult.success(HandlerFactory.getApp(3, jsonObject.toString()));
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        return CommonResult.success(userGallery.getApp3());
     }
 
     /**
@@ -207,7 +223,14 @@ public class ApiController {
      */
 
     @GetMapping("getInfo")
-    public String getInfo() {
-        return HandlerFactory.getInfo();
+    public String getInfo(@RequestParam(value = "taskId") String taskId) {
+        TaskInfo taskInfo = taskInfoService.getTaskInfo(taskId);
+        Tasks tasks = taskService.findTask(taskId);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("info", taskInfo.getInfo());
+        jsonObject.put("create_time", taskInfo.getCreate_time());
+        jsonObject.put("fileName", tasks.getFile_name());
+        String result = jsonObject.toString();
+        return CommonResult.success(result);
     }
 }

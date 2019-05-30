@@ -130,5 +130,30 @@ public class MainTest {
 //    }
 
 
+
+
+    @Test
+    public void test() {
+        Demo demo = new Demo("apple");
+        String result = Demo.getResult();
+        System.out.println(result);
+    }
+
+
+}
+
+class Demo {
+    private static String result;
+
+    public Demo(String result) {
+        this.result = result;
+    }
+
+    public static String getResult() {
+        return result;
+    }
+
+    public Demo() {
+    }
 }
 

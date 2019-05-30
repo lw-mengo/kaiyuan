@@ -10,9 +10,14 @@ public class TaskInfoService {
     @Autowired
     private TaskInfoDao infoDao;
 
-    public String getTaskInfo(String taskId) {
+    /**
+     * 根据taskID查找task信息
+     * @param taskId
+     * @return
+     */
+    public TaskInfo getTaskInfo(String taskId) {
         TaskInfo taskInfo = infoDao.findByTaskid(taskId);
-        return taskInfo.getInfo();
+        return taskInfo;
     }
 
 

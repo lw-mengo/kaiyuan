@@ -17,22 +17,22 @@ public class HandlerFactory {
         String result="";
         switch (i) {
             case 1:
-                result += handler.getApp1(conf);
+                result += handler.getApp1(conf);//过滤
                 break;
             case 2:
-                result += handler.getApp2(conf);
+                result += handler.getApp2(conf);//步进探索
                 break;
             case 3:
-                result += handler.getApp3(conf);
+                result += handler.getApp3(conf);//关联路径
                 break;
             case 4:
-                result += handler.getApp4(conf);
+                result += handler.getApp4(conf);//社区
                 break;
             case 5:
-                result += handler.getApp5(conf);
+                result += handler.getApp5(conf);//抽样
                 break;
             case 6:
-                result += handler.getApp6(conf);
+                result += handler.getApp6(conf);//高级过滤
                 break;
         }
         return result;
