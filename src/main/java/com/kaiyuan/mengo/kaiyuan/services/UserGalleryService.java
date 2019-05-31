@@ -96,8 +96,11 @@ public class UserGalleryService {
             TaskInfo taskInfo = new TaskInfo();
             taskInfo.setTaskid(taskId);
             taskInfo.setCreate_time(new Timestamp(System.currentTimeMillis()));
-            taskInfo.setInfo(handler.getInfo());
+
+
             handler.uploadData(conf);
+            taskInfo.setInfo(handler.getInfo());
+            taskInfoService.add(taskInfo);
         } else {
             System.out.println("执行了cvs");
             String[] strings = new String[]{"test1", "test2"};
@@ -113,8 +116,16 @@ public class UserGalleryService {
             userGallery.setApp5(handler.getApp5(conf));
             userGallery.setApp6(handler.getApp6(conf));
             userGallery.setResult_url("no data");
-            handler.uploadData(strings, conf);
             dao.save(userGallery);
+            TaskInfo taskInfo = new TaskInfo();
+            taskInfo.setTaskid(taskId);
+            taskInfo.setCreate_time(new Timestamp(System.currentTimeMillis()));
+
+
+            handler.uploadData(strings, conf);
+            taskInfo.setInfo(handler.getInfo());
+            taskInfoService.add(taskInfo);
+
         }
 
 
