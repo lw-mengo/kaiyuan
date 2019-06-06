@@ -67,7 +67,7 @@ public class ApiController {
         jsonObject.put("edgeLabelList", edgeLabelList);
         jsonObject.put("minDegree", minDegree);
         UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return CommonResult.success(userGallery.getApp1());
+        return CommonResult.success(userGallery.getApp5());
     }
 
     /**
@@ -113,7 +113,7 @@ public class ApiController {
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("sampleSize", sampleSize);
         UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return CommonResult.success(userGallery.getApp5());
+        return CommonResult.success(userGallery.getApp1());
     }
 
     /**

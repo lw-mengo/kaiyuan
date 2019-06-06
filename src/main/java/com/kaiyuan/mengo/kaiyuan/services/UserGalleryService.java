@@ -77,6 +77,17 @@ public class UserGalleryService {
         hashMap.put("titlePropertyName", "test");
         JSONObject jsonObject = JSONObject.fromObject(hashMap);
         String result = jsonObject.toString();
+        HashMap<String, String[]> hashMap1 = new HashMap<>();
+        hashMap1.put("nodeLabels", new String[]{"person"});
+        hashMap1.put("edgeLabels", new String[]{""});
+        JSONObject jsonObject1 = JSONObject.fromObject(hashMap1);
+        String result1 = jsonObject1.toString();
+
+        String cypher_app = "match p=(n)--() return p,n;";
+        HashMap<String, String> conf6 = new HashMap<>();
+        conf6.put("cypher", cypher_app);
+        JSONObject jsonObject2 = JSONObject.fromObject(conf6);
+        String confStr = jsonObject2.toString();
         //根据conf的特征来判断是json还是cvs
         if (conf.contains("json")) {
             System.out.println("执行了json");
@@ -85,22 +96,21 @@ public class UserGalleryService {
             userGallery.setTaskid(taskId);
             userGallery.setUid(user.getUid());
             userGallery.setUsername(name);
-            userGallery.setApp1(handler.getApp1(conf));
-            userGallery.setApp2(handler.getApp1(result));
-            userGallery.setApp3(handler.getApp3(conf));
-            userGallery.setApp4(handler.getApp4(conf));
-            userGallery.setApp5(handler.getApp5(conf));
-            userGallery.setApp6(handler.getApp6(conf));
-            userGallery.setResult_url("no data");
-            dao.save(userGallery);
+
             TaskInfo taskInfo = new TaskInfo();
             taskInfo.setTaskid(taskId);
             taskInfo.setCreate_time(new Timestamp(System.currentTimeMillis()));
-
-
             handler.uploadData(conf);
             taskInfo.setInfo(handler.getInfo());
             taskInfoService.add(taskInfo);
+            userGallery.setApp1(handler.getApp1(conf));
+            userGallery.setApp2(handler.getApp2(result));
+            userGallery.setApp3(handler.getApp3(conf));
+            userGallery.setApp4(handler.getApp4(conf));
+            userGallery.setApp5(handler.getApp5(result1));
+            userGallery.setApp6(handler.getApp6(confStr));
+            userGallery.setResult_url("no data");
+            dao.save(userGallery);
         } else {
             System.out.println("执行了cvs");
             String[] strings = new String[]{"test1", "test2"};
@@ -109,22 +119,21 @@ public class UserGalleryService {
             userGallery.setTaskid(taskId);
             userGallery.setUid(user.getUid());
             userGallery.setUsername(name);
+
+            TaskInfo taskInfo = new TaskInfo();
+            taskInfo.setTaskid(taskId);
+            taskInfo.setCreate_time(new Timestamp(System.currentTimeMillis()));
+            handler.uploadData(strings, conf);
+            taskInfo.setInfo(handler.getInfo());
+            taskInfoService.add(taskInfo);
             userGallery.setApp1(handler.getApp1(conf));
             userGallery.setApp2(handler.getApp2(result));
             userGallery.setApp3(handler.getApp3(conf));
             userGallery.setApp4(handler.getApp4(conf));
-            userGallery.setApp5(handler.getApp5(conf));
-            userGallery.setApp6(handler.getApp6(conf));
+            userGallery.setApp5(handler.getApp5(result1));
+            userGallery.setApp6(handler.getApp6(confStr));
             userGallery.setResult_url("no data");
             dao.save(userGallery);
-            TaskInfo taskInfo = new TaskInfo();
-            taskInfo.setTaskid(taskId);
-            taskInfo.setCreate_time(new Timestamp(System.currentTimeMillis()));
-
-
-            handler.uploadData(strings, conf);
-            taskInfo.setInfo(handler.getInfo());
-            taskInfoService.add(taskInfo);
 
         }
 
