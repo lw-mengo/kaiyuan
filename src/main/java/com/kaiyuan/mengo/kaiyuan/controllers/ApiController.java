@@ -1,5 +1,6 @@
 package com.kaiyuan.mengo.kaiyuan.controllers;
 
+import DrawSDK.Handler;
 import com.kaiyuan.mengo.kaiyuan.beans.TaskId;
 import com.kaiyuan.mengo.kaiyuan.entity.TaskInfo;
 import com.kaiyuan.mengo.kaiyuan.entity.Tasks;
@@ -30,8 +31,6 @@ public class ApiController {
     private TaskService taskService;
 
 
-
-
     //TODO 所有的图制作都要一个taskID 前端传入，然后根据对应方法制作图，并且保存到数据库
 
     /**
@@ -53,10 +52,10 @@ public class ApiController {
     @PostMapping("filtered")
     public String filtered(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage,
                            String nodeImageExpr, String initialScale, String nodeLabelList, String edgeLabelList, int minDegree,
-                           int maxDegree) {
+                           int maxDegree, String taskId) {
         logger.info(nodeLabelList + "\n" + edgeLabelList + "\n" + minDegree + "\n" + maxDegree);
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("titlePropertyName", titlePropertyName);
+        jsonObject.put("name", titlePropertyName);
         jsonObject.put("nodeValueExpr", nodeValueExpr);
         jsonObject.put("edgeValueExpr", edgeValueExpr);
         jsonObject.put("showEdgeLabel", showEdgeLabel);
@@ -66,8 +65,10 @@ public class ApiController {
         jsonObject.put("nodeLabelList", nodeLabelList);
         jsonObject.put("edgeLabelList", edgeLabelList);
         jsonObject.put("minDegree", minDegree);
-        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return CommonResult.success(userGallery.getApp5());
+        Handler handler = new Handler(taskId);
+
+//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        return handler.getApp5(jsonObject.toString());
     }
 
     /**
@@ -78,7 +79,7 @@ public class ApiController {
      */
     @PostMapping("advanced_filtered")
     public String advancedFiltered(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
-                                   String initialScale, String cypher) {
+                                   String initialScale, String cypher, String taskId) {
         logger.info(cypher);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("titlePropertyName", titlePropertyName);
@@ -89,8 +90,9 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("cypher", cypher);
-        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return CommonResult.success(userGallery.getApp6());
+        Handler handler = new Handler(taskId);
+//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        return handler.getApp6(jsonObject.toString());
     }
 
     /**
@@ -101,7 +103,7 @@ public class ApiController {
      */
     @PostMapping("sample")
     public String sample(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
-                         String initialScale, @RequestParam(value = "sampleSize") int sampleSize) {
+                         String initialScale, @RequestParam(value = "sampleSize") int sampleSize, String taskId) {
         logger.info(String.valueOf(sampleSize));
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("titlePropertyName", titlePropertyName);
@@ -112,8 +114,9 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("sampleSize", sampleSize);
-        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return CommonResult.success(userGallery.getApp1());
+//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        Handler handler = new Handler(taskId);
+        return handler.getApp1(jsonObject.toString());
     }
 
     /**
@@ -130,7 +133,7 @@ public class ApiController {
     @PostMapping("community")
     public String community(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
                             String initialScale, String nodeLabelList, int topN, int minCommunitySize, String communityBackgroundColors, String communityBorderColors,
-                            boolean allowOverlap) {
+                            boolean allowOverlap, String taskId) {
         logger.info(nodeLabelList + "\n" + topN + "\n" + minCommunitySize + "\n" + communityBackgroundColors + "\n"
                 + communityBorderColors + "\n" + allowOverlap);
         JSONObject jsonObject = new JSONObject();
@@ -147,8 +150,9 @@ public class ApiController {
         jsonObject.put("communityBackgroundColors", communityBackgroundColors);
         jsonObject.put("communityBorderColors", communityBorderColors);
         jsonObject.put("allowOverlap", allowOverlap);
-        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return CommonResult.success(userGallery.getApp4());
+//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        Handler handler = new Handler(taskId);
+        return handler.getApp4(jsonObject.toString());
     }
 
     /**
@@ -159,7 +163,7 @@ public class ApiController {
      */
     @PostMapping("stepping")
     public String stepping(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
-                           String initialScale, String initialNodelds) {
+                           String initialScale, String initialNodelds, String taskId) {
         logger.info(initialNodelds);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("titlePropertyName", titlePropertyName);
@@ -170,8 +174,9 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("initialNodelds", initialNodelds);
-        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return CommonResult.success(userGallery.getApp2());
+//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        Handler handler = new Handler(taskId);
+        return handler.getApp2(jsonObject.toString());
     }
 
     /**
@@ -183,7 +188,7 @@ public class ApiController {
      */
     @PostMapping("relate")
     public String relate(String titlePropertyName, String nodeValueExpr, String edgeValueExpr, boolean showEdgeLabel, boolean showImage, String nodeImageExpr,
-                         String initialScale, String initialNodelds, int initialDepth) {
+                         String initialScale, String initialNodelds, int initialDepth, String taskId) {
         logger.info(initialNodelds + "\n" + initialDepth);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("titlePropertyName", titlePropertyName);
@@ -195,8 +200,9 @@ public class ApiController {
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("initialNodelds", initialNodelds);
         jsonObject.put("initalDepth", initialDepth);
-        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return CommonResult.success(userGallery.getApp3());
+//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        Handler handler = new Handler(taskId);
+        return handler.getApp3(jsonObject.toString());
     }
 
     /**
