@@ -54,6 +54,14 @@ public class ApiController {
                            String nodeImageExpr, String initialScale, String nodeLabelList, String edgeLabelList, int minDegree,
                            int maxDegree, String taskId) {
         logger.info(nodeLabelList + "\n" + edgeLabelList + "\n" + minDegree + "\n" + maxDegree);
+        if (nodeLabelList == null) {
+            nodeLabelList = "";
+        }
+        if (edgeLabelList == null) {
+            edgeLabelList = "";
+        }
+        String[] node = new String[]{nodeLabelList};
+        String[] edge = new String[]{edgeLabelList};
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name", titlePropertyName);
         jsonObject.put("nodeValueExpr", nodeValueExpr);
@@ -62,13 +70,17 @@ public class ApiController {
         jsonObject.put("showImage", showImage);
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
-        jsonObject.put("nodeLabelList", nodeLabelList);
-        jsonObject.put("edgeLabelList", edgeLabelList);
+        jsonObject.put("nodeLabelList", node);
+        jsonObject.put("edgeLabelList", edge);
         jsonObject.put("minDegree", minDegree);
         Handler handler = new Handler(taskId);
 
-//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return handler.getApp5(jsonObject.toString());
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        String result = handler.getApp5(jsonObject.toString());
+        userGallery.setApp5(result);
+        userGalleryService.save(userGallery);
+        return CommonResult.success(result);
+//        return handler.getApp5(jsonObject.toString());
     }
 
     /**
@@ -91,8 +103,12 @@ public class ApiController {
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("cypher", cypher);
         Handler handler = new Handler(taskId);
-//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
-        return handler.getApp6(jsonObject.toString());
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        String result = handler.getApp6(jsonObject.toString());
+        userGallery.setApp6(result);
+        userGalleryService.save(userGallery);
+        return CommonResult.success(result);
+//        return handler.getApp6(jsonObject.toString());
     }
 
     /**
@@ -114,9 +130,13 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("sampleSize", sampleSize);
-//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
         Handler handler = new Handler(taskId);
-        return handler.getApp1(jsonObject.toString());
+        String result = handler.getApp1(jsonObject.toString());
+        userGallery.setApp1(result);
+        userGalleryService.save(userGallery);
+        return CommonResult.success(result);
+//        return handler.getApp1(jsonObject.toString());
     }
 
     /**
@@ -150,9 +170,13 @@ public class ApiController {
         jsonObject.put("communityBackgroundColors", communityBackgroundColors);
         jsonObject.put("communityBorderColors", communityBorderColors);
         jsonObject.put("allowOverlap", allowOverlap);
-//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+
         Handler handler = new Handler(taskId);
-        return handler.getApp4(jsonObject.toString());
+        String result = handler.getApp4(jsonObject.toString());
+        userGallery.setApp4(result);
+        userGalleryService.save(userGallery);
+        return CommonResult.success(result);
     }
 
     /**
@@ -174,9 +198,13 @@ public class ApiController {
         jsonObject.put("nodeImageExpr", nodeImageExpr);
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("initialNodelds", initialNodelds);
-//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
         Handler handler = new Handler(taskId);
-        return handler.getApp2(jsonObject.toString());
+        String result = handler.getApp2(jsonObject.toString());
+        userGallery.setApp2(result);
+        userGalleryService.save(userGallery);
+        return CommonResult.success(result);
+//        return handler.getApp2(jsonObject.toString());
     }
 
     /**
@@ -200,9 +228,13 @@ public class ApiController {
         jsonObject.put("initialScale", initialScale);
         jsonObject.put("initialNodelds", initialNodelds);
         jsonObject.put("initalDepth", initialDepth);
-//        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
+        UserGallery userGallery = userGalleryService.findByTaskid(TaskId.getTaskId());
         Handler handler = new Handler(taskId);
-        return handler.getApp3(jsonObject.toString());
+        String result = handler.getApp3(jsonObject.toString());
+        userGallery.setApp3(result);
+        userGalleryService.save(userGallery);
+        return CommonResult.success(result);
+//        return handler.getApp3(jsonObject.toString());
     }
 
     /**

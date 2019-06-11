@@ -72,9 +72,9 @@ public class UserGalleryService {
 //        System.out.println(conf);
         Handler handler = new Handler(taskId);
         TaskId taskId1 = new TaskId(taskId);//用于传输task
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("searchField", "test");
-        hashMap.put("titlePropertyName", "test");
+//        HashMap<String, String> hashMap = new HashMap<>();
+//        hashMap.put("searchField", "test");
+//        hashMap.put("titlePropertyName", "test");
 //        JSONObject jsonObject = JSONObject.fromObject(hashMap);
 //        String result = jsonObject.toString();
 //        HashMap<String, String[]> hashMap1 = new HashMap<>();
@@ -220,5 +220,11 @@ public class UserGalleryService {
         return dao.findByTaskid(taskId);
     }
 
-
+    /**
+     * 保存或更新
+     * @param userGallery
+     */
+    public void save(UserGallery userGallery){
+        dao.save(userGallery);
+    }
 }
